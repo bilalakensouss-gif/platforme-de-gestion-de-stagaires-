@@ -1,81 +1,84 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Tableau de bord — Étudiant
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+@section('page_title', 'Tableau de bord — Étudiant')
 
-            @if(session('success'))
-                <div class="bg-green-100 text-green-800 p-3 rounded">{{ session('success') }}</div>
-            @endif
+@section('content')
 
-            {{-- Info étudiant --}}
-            <div class="bg-white rounded shadow p-6">
-                <h3 class="font-semibold text-lg mb-2">Mon profil</h3>
-                <p><span class="text-gray-500">Nom :</span>
-                    {{ auth()->user()->prenom }} {{ auth()->user()->nom }}</p>
-                <p><span class="text-gray-500">Filière :</span>
-                    {{ auth()->user()->filiere }}</p>
-                <p><span class="text-gray-500">Email :</span>
-                    {{ auth()->user()->email }}</p>
-            </div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;">
 
-            {{-- État convention --}}
-            <div class="bg-white rounded shadow p-6">
-                <h3 class="font-semibold text-lg mb-4">Ma convention</h3>
-                @if($convention)
-                    <div class="flex items-center gap-4">
-                        <div>
-                            <p><span class="text-gray-500">Type :</span>
-                                {{ $convention->type === 'stage_classique' ? 'Stage classique' : 'PFE' }}</p>
-                            <p><span class="text-gray-500">Entreprise :</span>
-                                {{ $convention->entreprise->raison_sociale }}</p>
-                            <p><span class="text-gray-500">État :</span>
-                                @if($convention->etat === 'signee')
-                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Signée ✓</span>
-                                @elseif($convention->etat === 'partiellement_signee')
-                                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">En cours</span>
-                                @else
-                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Non signée</span>
-                                @endif
-                            </p>
-                        </div>
-                    </div>
-                    <a href="{{ route('etudiant.convention') }}"
-                       class="mt-3 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                        Voir ma convention
-                    </a>
-                @else
-                    <p class="text-gray-400 mb-3">Aucune convention créée.</p>
-                    <a href="{{ route('etudiant.convention.create') }}"
-                       class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                        + Créer une convention
-                    </a>
-                @endif
-            </div>
-
-            {{-- Actions rapides --}}
-            <div class="bg-white rounded shadow p-6">
-                <h3 class="font-semibold text-lg mb-4">Actions rapides</h3>
-                <div class="flex flex-wrap gap-3">
-                    <a href="{{ route('etudiant.demande') }}"
-                       class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                        📄 Demande de stage
-                    </a>
-                    <a href="{{ route('etudiant.convention') }}"
-                       class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
-                        📋 Ma convention
-                    </a>
-                    <a href="{{ route('etudiant.rapport') }}"
-                       class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
-                        📁 Mon rapport
-                    </a>
-                </div>
-            </div>
-
+    {{-- Profil --}}
+    <div class="card">
+        <div class="card-header"><h3>Mon profil</h3></div>
+        <div class="card-body">
+            <p style="margin-bottom:8px;">
+                <span style="color:#888; font-size:12px;">Nom</span><br>
+                <strong>{{ auth()->user()->prenom }} {{ auth()->user()->nom }}</strong>
+            </p>
+            <p style="margin-bottom:8px;">
+                <span style="color:#888; font-size:12px;">Filière</span><br>
+                <strong>{{ auth()->user()->filiere }}</strong>
+            </p>
+            <p>
+                <span style="color:#888; font-size:12px;">Email</span><br>
+                <strong>{{ auth()->user()->email }}</strong>
+            </p>
         </div>
     </div>
-</x-app-layout>
+
+    {{-- Convention --}}
+    <div class="card">
+        <div class="card-header"><h3>Ma convention</h3></div>
+        <div class="card-body">
+            @if($convention)
+                <p style="margin-bottom:8px;">
+                    <span style="color:#888; font-size:12px;">Type</span><br>
+                    <strong>{{ $convention->type === 'stage_classique' ? 'Stage classique' : 'PFE' }}</strong>
+                </p>
+                <p style="margin-bottom:8px;">
+                    <span style="color:#888; font-size:12px;">Entreprise</span><br>
+                    <strong>{{ $convention->entreprise->raison_sociale }}</strong>
+                </p>
+                <p style="margin-bottom:12px;">
+                    <span style="color:#888; font-size:12px;">État</span><br>
+                    @if($convention->etat === 'signee')
+                        <span class="badge badge-success">Signée ✓</span>
+                    @elseif($convention->etat === 'partiellement_signee')
+                        <span class="badge badge-warning">En cours</span>
+                    @else
+                        <span class="badge badge-danger">Non signée</span>
+                    @endif
+                </p>
+                <a href="{{ route('etudiant.convention') }}" class="btn btn-primary btn-sm">
+                    Voir ma convention
+                </a>
+            @else
+                <p style="color:#999; margin-bottom:12px;">Aucune convention créée.</p>
+                <a href="{{ route('etudiant.convention.create') }}" class="btn btn-success btn-sm">
+                    + Créer une convention
+                </a>
+            @endif
+        </div>
+    </div>
+
+</div>
+
+{{-- Actions rapides --}}
+<div class="card">
+    <div class="card-header"><h3>Actions rapides</h3></div>
+    <div class="card-body" style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="{{ route('etudiant.demande') }}" class="btn btn-primary">
+            📄 Demande de stage
+        </a>
+        <a href="{{ route('etudiant.convention') }}" class="btn btn-secondary">
+            📋 Ma convention
+        </a>
+        <a href="{{ route('etudiant.gantt') }}" class="btn btn-secondary">
+            📊 Mon Gantt
+        </a>
+        <a href="{{ route('etudiant.rapport') }}" class="btn btn-secondary">
+            📁 Mon rapport
+        </a>
+    </div>
+</div>
+
+@endsection

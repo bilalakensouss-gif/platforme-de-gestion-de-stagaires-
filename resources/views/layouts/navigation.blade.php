@@ -44,6 +44,9 @@
                             <x-nav-link :href="route('etudiant.convention')" :active="request()->routeIs('etudiant.convention')">
                                 Ma convention
                             </x-nav-link>
+                            <x-nav-link :href="route('etudiant.gantt')" :active="request()->routeIs('etudiant.gantt')">
+                                Mon Gantt
+                            </x-nav-link>
                             <x-nav-link :href="route('etudiant.rapport')" :active="request()->routeIs('etudiant.rapport')">
                                 Mon rapport
                             </x-nav-link>
@@ -51,6 +54,12 @@
                         @elseif(auth()->user()->role === 'encadrant')
                             <x-nav-link :href="route('encadrant.dashboard')" :active="request()->routeIs('encadrant.dashboard')">
                                 Tableau de bord
+                            </x-nav-link>
+                            <x-nav-link :href="route('encadrant.etudiants')" :active="request()->routeIs('encadrant.etudiants')">
+                                Mes étudiants
+                            </x-nav-link>
+                            <x-nav-link :href="route('encadrant.gantt')" :active="request()->routeIs('encadrant.gantt')">
+                                Diagramme Gantt
                             </x-nav-link>
                         @endif
                     @endauth
@@ -141,6 +150,9 @@
                     <x-responsive-nav-link :href="route('etudiant.convention')" :active="request()->routeIs('etudiant.convention')">
                         Ma convention
                     </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('etudiant.gantt')" :active="request()->routeIs('etudiant.gantt')">
+                        Mon Gantt
+                    </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('etudiant.rapport')" :active="request()->routeIs('etudiant.rapport')">
                         Mon rapport
                     </x-responsive-nav-link>
@@ -148,6 +160,12 @@
                 @elseif(auth()->user()->role === 'encadrant')
                     <x-responsive-nav-link :href="route('encadrant.dashboard')" :active="request()->routeIs('encadrant.dashboard')">
                         Tableau de bord
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('encadrant.etudiants')" :active="request()->routeIs('encadrant.etudiants')">
+                        Mes étudiants
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('encadrant.gantt')" :active="request()->routeIs('encadrant.gantt')">
+                        Diagramme Gantt
                     </x-responsive-nav-link>
                 @endif
             @endauth

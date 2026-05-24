@@ -1,58 +1,76 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Ajouter une entreprise
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-6 max-w-2xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white rounded shadow p-6">
-            @if($errors->any())
-                <div class="bg-red-100 text-red-800 p-3 rounded mb-4">
-                    @foreach($errors->all() as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
-                </div>
-            @endif
+@section('page_title', 'Ajouter une entreprise')
 
-            <form method="POST" action="{{ route('doyen.entreprises.store') }}">
-                @csrf
-                <div class="mb-4">
-                    <x-input-label for="raison_sociale" value="Raison sociale" />
-                    <x-text-input id="raison_sociale" name="raison_sociale" type="text"
-                        class="block mt-1 w-full" :value="old('raison_sociale')" required />
-                </div>
-                <div class="mb-4">
-                    <x-input-label for="adresse" value="Adresse" />
-                    <x-text-input id="adresse" name="adresse" type="text"
-                        class="block mt-1 w-full" :value="old('adresse')" required />
-                </div>
-                <div class="mb-4">
-                    <x-input-label for="secteur" value="Secteur d'activité" />
-                    <x-text-input id="secteur" name="secteur" type="text"
-                        class="block mt-1 w-full" :value="old('secteur')" />
-                </div>
-                <div class="mb-4">
-                    <x-input-label for="email_contact" value="Email de contact" />
-                    <x-text-input id="email_contact" name="email_contact" type="email"
-                        class="block mt-1 w-full" :value="old('email_contact')" required />
-                </div>
-                <div class="mb-4">
-                    <x-input-label for="password" value="Mot de passe" />
-                    <x-text-input id="password" name="password" type="password"
-                        class="block mt-1 w-full" required />
-                </div>
-                <div class="mb-4">
-                    <x-input-label for="password_confirmation" value="Confirmer le mot de passe" />
-                    <x-text-input id="password_confirmation" name="password_confirmation"
-                        type="password" class="block mt-1 w-full" required />
-                </div>
-                <div class="flex gap-3">
-                    <x-primary-button>Créer l'entreprise</x-primary-button>
-                    <a href="{{ route('doyen.utilisateurs') }}"
-                       class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Annuler</a>
-                </div>
-            </form>
-        </div>
+@section('content')
+
+<div class="card" style="max-width:700px;">
+    <div class="card-header">
+        <h3>Nouvelle entreprise</h3>
+        <a href="{{ route('doyen.utilisateurs') }}" class="btn btn-secondary btn-sm">
+            ← Retour
+        </a>
     </div>
-</x-app-layout>
+    <div class="card-body">
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
+        <form method="POST" action="{{ route('doyen.entreprises.store') }}">
+            @csrf
+
+            <div class="form-group">
+                <label class="form-label">Raison sociale</label>
+                <input type="text" name="raison_sociale" class="form-control"
+                       value="{{ old('raison_sociale') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Adresse</label>
+                <input type="text" name="adresse" class="form-control"
+                       value="{{ old('adresse') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Secteur d'activité</label>
+                <input type="text" name="secteur" class="form-control"
+                       value="{{ old('secteur') }}">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email de contact</label>
+                <input type="email" name="email_contact" class="form-control"
+                       value="{{ old('email_contact') }}" required>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                <div class="form-group">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Confirmer le mot de passe</label>
+                    <input type="password" name="password_confirmation"
+                           class="form-control" required>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:10px;">
+                <button type="submit" class="btn btn-primary">
+                    💾 Créer l'entreprise
+                </button>
+                <a href="{{ route('doyen.utilisateurs') }}" class="btn btn-secondary">
+                    Annuler
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@endsection

@@ -7,13 +7,26 @@ use App\Http\Controllers\Chef\ChefController;
 use App\Http\Controllers\Etudiant\EtudiantController;
 use App\Http\Controllers\Entreprise\EntrepriseController;
 use App\Http\Controllers\Encadrant\EncadrantController;
+use App\Http\Controllers\ConventionPdfController;
 
-// Page d'accueil → login
+// Page d'accueil
 Route::get('/', function () {
-    return redirect()->route('login');
+    if (auth()->check()) {
+        return match(auth()->user()->role) {
+            'doyen'        => redirect()->route('doyen.dashboard'),
+            'chef_filiere' => redirect()->route('chef.dashboard'),
+            'etudiant'     => redirect()->route('etudiant.dashboard'),
+            'encadrant'    => redirect()->route('encadrant.dashboard'),
+            default        => redirect()->route('login'),
+        };
+    }
+    if (auth('entreprise')->check()) {
+        return redirect()->route('entreprise.dashboard');
+    }
+    return view('welcome');
 });
 
-// Routes Breeze (login, logout, register...)
+// Routes Breeze
 require __DIR__.'/auth.php';
 
 // =====================
@@ -24,13 +37,12 @@ Route::post('/entreprise/login', [EntrepriseLoginController::class, 'login'])->n
 Route::post('/entreprise/logout', [EntrepriseLoginController::class, 'logout'])->name('entreprise.logout');
 
 // =====================
-// =====================
 // Espace Doyen
 // =====================
 Route::prefix('doyen')->name('doyen.')->middleware(['auth', 'role:doyen'])->group(function () {
     Route::get('/dashboard', [DoyenController::class, 'dashboard'])->name('dashboard');
 
-    // Gestion des utilisateurs
+    // Utilisateurs
     Route::get('/utilisateurs', [DoyenController::class, 'utilisateurs'])->name('utilisateurs');
 
     // Encadrants
@@ -51,11 +63,9 @@ Route::prefix('doyen')->name('doyen.')->middleware(['auth', 'role:doyen'])->grou
     // Conventions
     Route::get('/conventions', [DoyenController::class, 'conventions'])->name('conventions');
     Route::post('/conventions/{id}/signer', [DoyenController::class, 'signerConvention'])->name('conventions.signer');
+    Route::get('/conventions/{id}/pdf', [ConventionPdfController::class, 'downloadDoyen'])->name('conventions.pdf');
 });
 
-// =====================
-// Espace Chef de Filière
-// =====================
 // =====================
 // Espace Chef de Filière
 // =====================
@@ -66,15 +76,14 @@ Route::prefix('chef')->name('chef.')->middleware(['auth', 'role:chef_filiere'])-
     Route::get('/demandes', [ChefController::class, 'demandes'])->name('demandes');
     Route::post('/demandes', [ChefController::class, 'storeDemande'])->name('demandes.store');
     Route::delete('/demandes/{id}', [ChefController::class, 'destroyDemande'])->name('demandes.destroy');
+
     // Conventions
     Route::get('/conventions', [ChefController::class, 'conventions'])->name('conventions');
     Route::post('/conventions/{id}/signer', [ChefController::class, 'signerConvention'])->name('conventions.signer');
     Route::post('/conventions/{id}/affecter', [ChefController::class, 'affecterEncadrant'])->name('conventions.affecter');
+    Route::get('/conventions/{id}/pdf', [ConventionPdfController::class, 'downloadChef'])->name('conventions.pdf');
 });
 
-// =====================
-// Espace Étudiant
-// =====================
 // =====================
 // Espace Étudiant
 // =====================
@@ -89,8 +98,8 @@ Route::prefix('etudiant')->name('etudiant.')->middleware(['auth', 'role:etudiant
     Route::get('/convention/create', [EtudiantController::class, 'createConvention'])->name('convention.create');
     Route::post('/convention', [EtudiantController::class, 'storeConvention'])->name('convention.store');
     Route::post('/convention/{id}/signer', [EtudiantController::class, 'signerConvention'])->name('convention.signer');
-    Route::get('/convention/{id}/pdf', [EtudiantController::class, 'telechargerPdf'])->name('convention.pdf');
-
+    Route::get('/convention/{id}/pdf', [ConventionPdfController::class, 'downloadEtudiant'])->name('convention.pdf');
+Route::get('/gantt', [EtudiantController::class, 'gantt'])->name('gantt');
     // Rapport
     Route::get('/rapport', [EtudiantController::class, 'rapport'])->name('rapport');
     Route::post('/rapport', [EtudiantController::class, 'storeRapport'])->name('rapport.store');
@@ -99,8 +108,17 @@ Route::prefix('etudiant')->name('etudiant.')->middleware(['auth', 'role:etudiant
 // =====================
 // Espace Encadrant
 // =====================
+// =====================
+// Espace Encadrant
+// =====================
 Route::prefix('encadrant')->name('encadrant.')->middleware(['auth', 'role:encadrant'])->group(function () {
     Route::get('/dashboard', [EncadrantController::class, 'dashboard'])->name('dashboard');
+    Route::get('/etudiants', [EncadrantController::class, 'etudiants'])->name('etudiants');
+    Route::get('/etudiants/{id}', [EncadrantController::class, 'etudiant'])->name('etudiant.show');
+    Route::get('/gantt', [EncadrantController::class, 'gantt'])->name('gantt');
+
+    // Mise à jour progression Gantt
+    Route::post('/gantt/{id}/update', [EncadrantController::class, 'updateGantt'])->name('gantt.update');
 });
 
 // =====================
@@ -108,4 +126,7 @@ Route::prefix('encadrant')->name('encadrant.')->middleware(['auth', 'role:encadr
 // =====================
 Route::prefix('entreprise')->name('entreprise.')->middleware(['entreprise'])->group(function () {
     Route::get('/dashboard', [EntrepriseController::class, 'dashboard'])->name('dashboard');
+    Route::get('/convention', [EntrepriseController::class, 'convention'])->name('convention');
+    Route::post('/convention/{id}/signer', [EntrepriseController::class, 'signerConvention'])->name('convention.signer');
+    Route::get('/convention/{id}/pdf', [ConventionPdfController::class, 'downloadEntreprise'])->name('convention.pdf');
 });

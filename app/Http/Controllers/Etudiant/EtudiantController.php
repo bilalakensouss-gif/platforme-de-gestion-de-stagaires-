@@ -9,6 +9,8 @@ use App\Models\Entreprise;
 use App\Models\Rapport;
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
+use App\Models\GanttTask;
+
 use Illuminate\Support\Facades\Storage;
 
 class EtudiantController extends Controller
@@ -16,6 +18,22 @@ class EtudiantController extends Controller
     // =====================
     // Dashboard
     // =====================
+    public function gantt()
+{
+    $convention = Convention::with(['etudiant', 'entreprise', 'encadrant'])
+                            ->where('etudiant_id', auth()->id())
+                            ->latest()
+                            ->first();
+
+    $tasks = [];
+    if ($convention) {
+        $tasks = GanttTask::where('convention_id', $convention->id)
+                          ->orderBy('ordre')
+                          ->get();
+    }
+
+    return view('etudiant.gantt', compact('convention', 'tasks'));
+}
     public function dashboard()
     {
         $convention = Convention::where('etudiant_id', auth()->id())
@@ -83,20 +101,71 @@ class EtudiantController extends Controller
             'maitre_stage'   => 'nullable|string|max:255',
         ]);
 
-        Convention::create([
-            'etudiant_id'    => auth()->id(),
-            'entreprise_id'  => $request->entreprise_id,
-            'type'           => $request->type,
-            'intitule_stage' => $request->intitule_stage,
-            'date_debut'     => $request->date_debut,
-            'date_fin'       => $request->date_fin,
-            'service'        => $request->service,
-            'maitre_stage'   => $request->maitre_stage,
-            'etat'           => 'non_signee',
-            'etape_signature'=> 0,
-            'date_creation'  => now(),
-        ]);
+        $convention = Convention::create([
+    'etudiant_id'    => auth()->id(),
+    'entreprise_id'  => $request->entreprise_id,
+    'type'           => $request->type,
+    'intitule_stage' => $request->intitule_stage,
+    'date_debut'     => $request->date_debut,
+    'date_fin'       => $request->date_fin,
+    'service'        => $request->service,
+    'maitre_stage'   => $request->maitre_stage,
+    'etat'           => 'non_signee',
+    'etape_signature'=> 0,
+    'date_creation'  => now(),
+]);
+// Créer les tâches Gantt par défaut
+             $tachesDefaut = [
+    [
+        'titre'       => 'Intégration & découverte de l\'entreprise',
+        'ordre'       => 1,
+        'progression' => 0,
+        'statut'      => 'non_commence',
+    ],
+    [
+        'titre'       => 'Visite et étude des postes sources',
+        'ordre'       => 2,
+        'progression' => 0,
+        'statut'      => 'non_commence',
+    ],
+    [
+        'titre'       => 'Dimensionnement',
+        'ordre'       => 3,
+        'progression' => 0,
+        'statut'      => 'non_commence',
+    ],
+    [
+        'titre'       => 'Étude BT',
+        'ordre'       => 4,
+        'progression' => 0,
+        'statut'      => 'non_commence',
+    ],
+    [
+        'titre'       => 'Suivi & rédaction du rapport',
+        'ordre'       => 5,
+        'progression' => 0,
+        'statut'      => 'non_commence',
+    ],
+    [
+        'titre'       => 'Préparation soutenance',
+        'ordre'       => 6,
+        'progression' => 0,
+        'statut'      => 'non_commence',
+    ],
+];
 
+foreach ($tachesDefaut as $tache) {
+    GanttTask::create([
+        'convention_id' => $convention->id,
+        'etudiant_id'   => auth()->id(),
+        'titre'         => $tache['titre'],
+        'date_debut'    => $request->date_debut,
+        'date_fin'      => $request->date_fin,
+        'progression'   => $tache['progression'],
+        'statut'        => $tache['statut'],
+        'ordre'         => $tache['ordre'],
+    ]);
+}
         ActivityLog::log('user', auth()->id(), 'creation_convention');
 
         return redirect()->route('etudiant.convention')
