@@ -205,21 +205,21 @@
 
             <div class="lp-features">
                 <div class="lp-feature">
-                    <div class="lp-feature-icon">📄</div>
+                    <div class="lp-feature-icon"></div>
                     <div class="lp-feature-text">
                         <div class="title">Consultation des conventions</div>
                         <div class="desc">Accédez aux conventions PDF de vos stagiaires</div>
                     </div>
                 </div>
                 <div class="lp-feature">
-                    <div class="lp-feature-icon">✍️</div>
+                    <div class="lp-feature-icon"></div>
                     <div class="lp-feature-text">
                         <div class="title">Signature numérique</div>
                         <div class="desc">Signez les conventions en ligne — zéro papier</div>
                     </div>
                 </div>
                 <div class="lp-feature">
-                    <div class="lp-feature-icon">📊</div>
+                    <div class="lp-feature-icon"></div>
                     <div class="lp-feature-text">
                         <div class="title">Suivi en temps réel</div>
                         <div class="desc">Visualisez l'état de chaque convention</div>
@@ -245,7 +245,7 @@
             </div>
 
             @if($errors->any())
-                <div class="alert-error">⚠️ {{ $errors->first() }}</div>
+                <div class="alert-error"> {{ $errors->first() }}</div>
             @endif
 
             <form method="POST" action="{{ route('entreprise.login.post') }}">

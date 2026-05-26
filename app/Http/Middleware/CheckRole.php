@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class CheckRole
 {
@@ -13,7 +14,10 @@ class CheckRole
             return redirect()->route('login');
         }
 
-        if (!in_array(auth()->user()->role, $roles)) {
+        /** @var User $user */
+        $user = auth()->user();
+
+        if (!in_array($user->role, $roles)) {
             abort(403, 'Accès non autorisé.');
         }
 

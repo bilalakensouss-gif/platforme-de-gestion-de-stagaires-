@@ -11,12 +11,15 @@ class Entreprise extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'raison_sociale',
-        'adresse',
-        'secteur',
-        'email_contact',
-        'password',
-    ];
+    'raison_sociale',
+    'adresse',
+    'secteur',
+    'telephone',
+    'fax',
+    'representant',
+    'email_contact',
+    'password',
+];
 
     protected $hidden = [
         'password',

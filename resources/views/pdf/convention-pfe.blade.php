@@ -2,398 +2,211 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <title>Convention de Stage - FST Marrakech</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            color: #000;
-            padding: 20px 30px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #000;
-            padding-bottom: 10px;
-        }
-        .title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            margin: 25px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .section { margin-bottom: 12px; line-height: 1.8; }
-        .article-title { font-weight: bold; margin-top: 12px; margin-bottom: 4px; }
-        .article-content { text-align: justify; line-height: 1.7; }
+        body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; color: #222; line-height: 1.5; padding: 20px; }
+        .page { width: 100%; max-width: 800px; margin: 0 auto; padding: 40px; border: 1px solid #ddd; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #000; padding-bottom: 15px; }
+        .faculty-name { font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
+        .university { font-size: 13px; font-weight: bold; color: #555; }
+        .doc-title { text-align: center; font-size: 20px; font-weight: bold; text-transform: uppercase; margin: 30px 0 20px; text-decoration: underline; }
+        .section { margin-bottom: 20px; }
+        .article { margin-bottom: 15px; text-align: justify; }
+        .article-title { font-weight: bold; font-size: 12px; margin-bottom: 3px; }
+        .field-group { margin-bottom: 8px; }
         .field-label { font-weight: bold; }
-        .field-value { border-bottom: 1px solid #000; }
-        .indent { margin-left: 20px; }
-        .signatures {
-            margin-top: 30px;
-            display: table;
-            width: 100%;
-        }
-        .sig-col {
-            display: table-cell;
-            width: 50%;
-            text-align: center;
-            vertical-align: top;
-            padding: 10px 5px;
-        }
-        .sig-title { font-weight: bold; margin-bottom: 8px; font-size: 11px; }
-        .sig-signed { color: green; font-size: 10px; }
-        .sig-pending { color: #999; font-size: 10px; font-style: italic; }
-        .sig-name { font-size: 10px; color: #555; margin-top: 5px; }
-        .footer {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            text-align: center;
-            font-size: 9px;
-            color: #555;
-            border-top: 1px solid #000;
-            padding: 5px 20px;
-        }
-        .page-num {
-            text-align: right;
-            font-size: 10px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .divider { border: none; border-top: 1px solid #000; margin: 12px 0; }
+        .field-value { border-bottom: 1px solid #000; padding: 0 5px 1px 5px; min-width: 50px; display: inline-block; }
+        .field-value-wide { border-bottom: 1px solid #000; padding: 0 5px 1px 5px; min-width: 200px; display: inline-block; }
+        .signatures-table { width: 100%; margin-top: 40px; border-collapse: separate; border-spacing: 10px; }
+        .sig-cell { width: 50%; vertical-align: top; text-align: center; border-top: 1px solid #ccc; padding-top: 10px; }
+        .sig-title { font-weight: bold; font-size: 12px; margin-bottom: 5px; }
+        .status-signed { color: green; font-size: 10px; font-weight: bold; }
+        .status-pending { color: #bbb; font-size: 10px; font-style: italic; }
+        .footer { margin-top: 40px; padding-top: 10px; border-top: 1px solid #999; text-align: center; font-size: 9px; color: #666; }
     </style>
 </head>
 <body>
-
-    {{-- Header --}}
-    <div class="header">
-        <div style="text-align:center; margin-bottom:8px;">
-            <span style="font-size:14px; font-weight:bold; color:#c00;">
-                كلية العلــــوم والتقنيات - مراكش
-            </span><br>
-            <span style="font-size:13px; font-weight:bold;">FACULTÉ DES SCIENCES ET TECHNIQUES</span><br>
-            <span style="font-size:11px; color:#555;">Université Cadi Ayyad — MARRAKECH</span>
-        </div>
-    </div>
-
-    <div class="page-num">1/3</div>
-    <div style="font-size:9px; border-bottom:1px solid #000; padding-bottom:3px; margin-bottom:10px;">
-        Convention de stage FSTG/ &nbsp;&nbsp;&nbsp; -Etudiant–
-    </div>
-
-    {{-- Titre --}}
-    <div class="title">CONVENTION DE STAGE</div>
-
-    {{-- Article 1 --}}
-    <div class="section">
-        <p class="article-title">Article 1 : Objet de la convention</p>
-        <p class="article-content">
-            La présente convention de stage a pour objet de régler les rapports entre :
-        </p>
-        <br>
-        <p>
-            - La Faculté des Sciences et Techniques de Marrakech, représentée par son Doyen
-            Monsieur <strong>{{ $doyen ?? 'SAID RAKRAK' }}</strong>
-        </p>
-        <p>Adresse &nbsp;&nbsp; : BP 549, AV. Abdelkrim El khattabi, Guéliz, Marrakech, Maroc,</p>
-        <p>Téléphone : +212 524 43 34 04</p>
-        <p>Fax &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: +212 524 43 31 70</p>
-        <p>et désignée ci après par <strong>Etablissement</strong>.</p>
-        <br>
-        <p>Et</p>
-        <br>
-        <p>- L'Organisme ci-dessous mentionné :</p>
-        <p><span class="field-label">Nom &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
-            <span class="field-value"> {{ $convention->entreprise->raison_sociale }}</span></p>
-        <p><span class="field-label">Adresse &nbsp;&nbsp;&nbsp;:</span>
-            <span class="field-value"> {{ $convention->entreprise->adresse }}</span></p>
-        <p><span class="field-label">Téléphone :</span>
-            <span class="field-value"> {{ $convention->entreprise->telephone ?? '—' }}</span></p>
-        <p><span class="field-label">Fax &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
-            <span class="field-value"> —</span></p>
-        <p><span class="field-label">Représenté par :</span>
-            <span class="field-value"> {{ $convention->maitre_stage ?? '—' }}</span></p>
-        <p>Et désigné ci-après par <strong>l'Organisme</strong>.</p>
-        <br>
-        <p>Elle concerne :
-            <span class="field-value">
-                {{ $convention->etudiant->prenom }} {{ $convention->etudiant->nom }}
-            </span>
-        </p>
-        <p>
-            Étudiant(e) régulièrement inscrit(e) dans l'établissement pour l'année universitaire
-            {{ date('Y') }}/{{ date('Y') + 1 }} et dont la carte d'étudiant porte le numéro
-            du Code Massar suivant : ………………………
-        </p>
-        <p>Et dénommé ci-après <strong>le stagiaire</strong>.</p>
-    </div>
-
-    {{-- Article 2 --}}
-    <div class="section">
-        <p class="article-title">Article 2 : Objectif du stage</p>
-        <p class="article-content">
-            Le stage de formation a pour objet de permettre à l'étudiant de mettre en pratique
-            les outils théoriques et méthodologiques acquis au cours de sa formation, d'identifier
-            ses compétences et de conforter son objectif professionnel.
-        </p>
-        <p class="article-content">
-            Le stage s'inscrit dans le cadre de la formation et du projet personnel et professionnel
-            de l'étudiant. Il entre dans son cursus pédagogique et est obligatoire en vue de la
-            délivrance du diplôme.
-        </p>
-    </div>
-
-    {{-- Article 3 --}}
-    <div class="section">
-        <p class="article-title">Article 3 : Lieu et période du stage</p>
-        <p>
-            Le stage d'une durée de
-            <strong>{{ $convention->date_debut->diffInDays($convention->date_fin) }}</strong>
-            jours et se déroulera du
-            <strong>{{ $convention->date_debut->format('d/m/Y') }}</strong>
-            au
-            <strong>{{ $convention->date_fin->format('d/m/Y') }}</strong>
-        </p>
-        <p>Le stage aura lieu à :
-            <span class="field-value">
-                {{ $convention->entreprise->adresse }}
-                @if($convention->service) — {{ $convention->service }} @endif
-            </span>
-        </p>
-    </div>
-
-    <hr class="divider">
-    <div style="font-size:9px; margin-bottom:10px;">
-        Convention de stage FSTG/ &nbsp;&nbsp;&nbsp; -Etudiant–
-    </div>
-    <div class="page-num">2/3</div>
-
-    {{-- Article 4 --}}
-    <div class="section">
-        <p class="article-title">Article 4 : Statut du stagiaire – Accueil et encadrement</p>
-        <p class="article-content">
-            L'étudiant, pendant la durée de son stage dans l'Organisme, demeure étudiant de
-            l'Établissement ; il est suivi régulièrement par l'Établissement. L'Organisme nomme
-            un Encadrant chargé d'assurer le suivi technique et d'optimiser les conditions de
-            réalisation du stage.
-        </p>
-    </div>
-
-    {{-- Article 5 --}}
-    <div class="section">
-        <p class="article-title">Article 5 : Intitulé du stage</p>
-        <p>Le projet de stage est intitulé :
-            <span class="field-value"> {{ $convention->intitule_stage }}</span>
-        </p>
-        <p>Et son programme est établi en fonction de la spécialisation de l'étudiant.</p>
-        <br>
-        <p>Dans l'organisme d'accueil, le responsable de stage, chargé du suivi des travaux du stagiaire est :</p>
-        <p>Madame/Monsieur :
-            <span class="field-value"> {{ $convention->maitre_stage ?? '………………………………' }}</span>
-        </p>
-        <p>Qualité : <span class="field-value"> ………………………………………</span></p>
-        <p>Téléphone : <span class="field-value"> ………………………</span></p>
-        <p>E-mail : <span class="field-value"> {{ $convention->entreprise->email_contact }}</span></p>
-        <br>
-        <p>A la Faculté des Sciences et Techniques de Marrakech, le responsable de stage est :</p>
-        @if($convention->encadrant)
-        <p>Madame/Monsieur :
-            <span class="field-value">
-                {{ $convention->encadrant->prenom }} {{ $convention->encadrant->nom }}
-            </span>
-        </p>
-        <p>Qualité : <span class="field-value"> Enseignant — {{ $convention->encadrant->specialite }}</span></p>
-        @else
-        <p>Madame/Monsieur : <span class="field-value"> ………………………………………</span></p>
-        <p>Qualité : <span class="field-value"> ………………………………………</span></p>
-        @endif
-        <p>Téléphone : <span class="field-value"> ………………………</span></p>
-        <p>E-mail : <span class="field-value"> ………………………………………</span></p>
-    </div>
-
-    {{-- Article 6 --}}
-    <div class="section">
-        <p class="article-title">Article 6 : Gratification</p>
-        <p class="article-content">
-            L'étudiant ne peut prétendre à rémunération, cependant il peut bénéficier d'une
-            gratification. Les frais de déplacement et d'hébergement engagés par l'étudiant à
-            la demande de l'Organisme, ainsi que les frais de formation éventuellement nécessités
-            par le stage, seront intégralement pris en charge par l'Organisme selon les modalités
-            qui y sont en vigueur.
-        </p>
-    </div>
-
-    {{-- Article 7 --}}
-    <div class="section">
-        <p class="article-title">Article 7 : Responsabilité civile et assurances</p>
-        <p class="article-content">
-            Le stagiaire s'engage à se couvrir par un contrat d'assurance individuelle.
-            Lorsque l'Organisme met un véhicule à la disposition du stagiaire, il lui incombe
-            de vérifier préalablement que la police d'assurance du véhicule couvre son
-            utilisation par un étudiant.
-        </p>
-    </div>
-
-    {{-- Article 8 --}}
-    <div class="section">
-        <p class="article-title">Article 8 : Discipline</p>
-        <p class="article-content">
-            Durant son stage, l'étudiant est soumis à la discipline et au règlement intérieur
-            de l'Organisme, notamment en ce qui concerne les horaires, et les règles d'hygiène
-            et de sécurité en vigueur dans l'Organisme. Toute sanction disciplinaire ne peut
-            être décidée que par l'Établissement. Dans ce cas, l'Organisme informe l'Établissement
-            des manquements et lui fournit éventuellement les éléments constitutifs. En cas de
-            manquement particulièrement grave à la discipline, l'Organisme se réserve le droit
-            de mettre fin au stage de l'étudiant tout en respectant les dispositions fixées à
-            l'article 10 de la présente convention.
-        </p>
-    </div>
-
-    {{-- Article 9 --}}
-    <div class="section">
-        <p class="article-title">Article 9 : Fin de stage – Rapport – Evaluation</p>
-        <p class="article-content">
-            A l'issue du stage, l'Organisme délivre au stagiaire une attestation de stage et
-            remplit une fiche d'évaluation qu'il retourne à l'Établissement. Selon les règlements
-            pédagogiques en vigueur, l'étudiant sera susceptible de fournir un rapport. Ce rapport
-            ainsi que les éventuels travaux associés pourront être présentés lors d'une soutenance.
-        </p>
-    </div>
-
-    {{-- Article 10 --}}
-    <div class="section">
-        <p class="article-title">Article 10 : Absence et Interruption du stage</p>
-        <p class="article-content">
-            Au cours du stage, le stagiaire pourra bénéficier de congés sous réserve que la durée
-            minimale du stage soit respectée. Pour toute autre interruption temporaire du stage
-            (maladie, maternité, absence injustifiée…) l'Organisme avertira le Responsable de
-            l'Établissement par courrier.
-        </p>
-    </div>
-
-    {{-- Article 11 --}}
-    <div class="section">
-        <p class="article-title">Article 11 : Devoir de réserve et confidentialité</p>
-        <p class="article-content">
-            Le devoir de réserve est de rigueur absolue. Les étudiants stagiaires prennent donc
-            l'engagement de n'utiliser en aucun cas les informations recueillies ou obtenues par
-            eux pour en faire l'objet de publication, communication à des tiers sans accord
-            préalable de la Direction de l'Organisme, y compris le rapport de stage. Cet engagement
-            vaudra non seulement pour la durée du stage mais également après son expiration.
-        </p>
-    </div>
-
-    {{-- Article 12 --}}
-    <div class="section">
-        <p class="article-title">Article 12 : Recrutement</p>
-        <p class="article-content">
-            Le stagiaire n'est lié par aucun contrat de travail avec l'organisme qui l'accueille.
-            S'il advenait qu'un contrat de travail prenant effet avant la date de fin du stage soit
-            signé avec l'Organisme la présente convention deviendrait caduque.
-        </p>
-    </div>
-
-    {{-- Article 13 --}}
-    <div class="section">
-        <p class="article-title">Article 13 : Droit applicable – Tribunaux compétents</p>
-        <p class="article-content">
-            La présente convention est régie exclusivement par le droit marocain. Tout litige non
-            résolu par voie amiable sera soumis à la compétence de la juridiction marocaine compétente.
-        </p>
-    </div>
-
-    <hr class="divider">
-    <div style="font-size:9px; margin-bottom:10px;">
-        Convention de stage FSTG/ &nbsp;&nbsp;&nbsp; -Etudiant–
-    </div>
-    <div class="page-num">3/3</div>
-
-    <p style="font-weight:bold; margin-bottom:15px;">Lu et approuvé</p>
-
-    {{-- Signatures --}}
-    <div class="signatures">
-        <div class="sig-col">
-            <p class="sig-title">Le stagiaire :</p>
-            <p style="font-size:10px;">
-                ………………, le
-                @if($convention->date_signature_etudiant)
-                    {{ $convention->date_signature_etudiant->format('d/m/Y') }}
-                @else
-                    …………
-                @endif
-            </p>
-            @if($convention->date_signature_etudiant)
-                <p class="sig-signed">✓ Signé numériquement</p>
-                <p class="sig-name">
-                    {{ $convention->etudiant->prenom }} {{ $convention->etudiant->nom }}
-                </p>
-            @else
-                <p class="sig-pending">En attente</p>
-            @endif
+    <div class="page">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="faculty-name">Faculté des Sciences et Techniques</div>
+            <div class="university">Université Cadi Ayyad - Marrakech</div>
+            <div style="font-size: 10px; color: #666; margin-top: 5px;">
+                BP 549, Av. Abdelkrim El Khattabi, Guéliz, Marrakech, Maroc<br>
+                Tél: +212 524 43 34 04 / Fax: +212 524 43 31 70
+            </div>
         </div>
 
-        <div class="sig-col">
-            <p class="sig-title">Le Responsable de l'Organisme d'Accueil ou son délégué,</p>
-            <p style="font-size:10px;">
-                ………………, le
-                @if($convention->date_signature_entreprise)
-                    {{ $convention->date_signature_entreprise->format('d/m/Y') }}
-                @else
-                    …………
-                @endif
-            </p>
-            @if($convention->date_signature_entreprise)
-                <p class="sig-signed">✓ Signé numériquement</p>
-                <p class="sig-name">{{ $convention->entreprise->raison_sociale }}</p>
-            @else
-                <p class="sig-pending">En attente</p>
-            @endif
-        </div>
-    </div>
+        <!-- Titre -->
+        <div class="doc-title">Convention de Stage</div>
 
-    <div class="signatures" style="margin-top:20px;">
-        <div class="sig-col">
-            <p class="sig-title">Pour l'établissement,<br>Le Responsable de la Filière</p>
-            <p style="font-size:10px;">
-                ………………, le
-                @if($convention->date_signature_chef)
-                    {{ $convention->date_signature_chef->format('d/m/Y') }}
-                @else
-                    …………
-                @endif
-            </p>
-            @if($convention->date_signature_chef)
-                <p class="sig-signed">✓ Signé numériquement</p>
-            @else
-                <p class="sig-pending">En attente</p>
-            @endif
+        <!-- Parties -->
+        <div class="section">
+            <p>La présente convention est passée entre les soussignés :</p>
+            <br>
+            <p><strong>1. L'Etablissement d'Enseignement Supérieur</strong> :</p>
+            <p>Faculté des Sciences et Techniques de Marrakech, représentée par son Doyen Monsieur <strong>{{ $doyen ?? 'SAID RAKRAK' }}</strong>.</p>
+            <p>Adresse: BP 549, Av. Abdelkrim El Khattabi, Guéliz, Marrakech, Maroc</p>
+            <br>
+            <p><strong>2. L'Organisme d'Accueil (Entreprise)</strong> :</p>
+            <div class="field-group"><span class="field-label">Raison Sociale :</span> <span class="field-value-wide">{{ $convention->entreprise->raison_sociale ?? $convention->entreprise_nom ?? '........................' }}</span></div>
+            <div class="field-group"><span class="field-label">Adresse :</span> <span class="field-value-wide">{{ $convention->entreprise->adresse ?? $convention->entreprise_adresse ?? '........................' }}</span></div>
+            <div class="field-group"><span class="field-label">Téléphone :</span> <span class="field-value">{{ $convention->entreprise->telephone ?? $convention->entreprise_telephone ?? '........................' }}</span></div>
+            <div class="field-group"><span class="field-label">Fax :</span> <span class="field-value">{{ $convention->entreprise->fax ?? $convention->entreprise_fax ?? '........................' }}</span></div>
+            <div class="field-group"><span class="field-label">Représenté par :</span> <span class="field-value-wide">{{ $convention->entreprise_representant ?? $convention->maitre_stage ?? '........................' }}</span></div>
         </div>
 
-        <div class="sig-col">
-            <p class="sig-title">Le Doyen</p>
-            <p style="font-size:10px;">
-                ………………, le
-                @if($convention->date_signature_doyen)
-                    {{ $convention->date_signature_doyen->format('d/m/Y') }}
-                @else
-                    …………
-                @endif
-            </p>
-            @if($convention->date_signature_doyen)
-                <p class="sig-signed">✓ Signé numériquement</p>
-            @else
-                <p class="sig-pending">En attente</p>
-            @endif
+        <div class="section">
+            <p><strong>3. Le Stagiaire</strong> :</p>
+            <div class="field-group"><span class="field-label">Nom et Prénom :</span> <span class="field-value-wide">{{ $convention->etudiant->prenom }} {{ $convention->etudiant->nom }}</span></div>
+            <div class="field-group"><span class="field-label">Code Massar :</span> <span class="field-value-wide">{{ $convention->etudiant->code_masar ?? '........................' }}</span></div>
+            <div class="field-group"><span class="field-label">Niveau d'étude :</span> <span class="field-value">{{ $convention->niveau ?? 'Bac+5' }}</span></div>
+            <div class="field-group"><span class="field-label">Filière :</span> <span class="field-value-wide">{{ $convention->filiere ?? 'Ingénierie Informatique' }}</span></div>
+            <p>Etudiant(e) régulièrement inscrit(e) pour l'année universitaire {{ date('Y') }}/{{ date('Y')+1 }}</p>
+        </div>
+
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #000;">
+
+        <!-- Article 1 -->
+        <div class="section">
+            <p class="article-title">Article 1 : Objet de la convention</p>
+            <p class="article">La présente convention a pour objet de définir les modalités du stage professionnelle d'exécution du projet de fin d'études (PFE) effectué par le(stagiaire) au sein de l'Organisme d'Accueil.</p>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="section">
+            <p class="article-title">Article 2 : Dispositions générales</p>
+            <p class="article">Le stage s'inscrit dans le cadre de la formation du(stagiaire) et est obligatorio en vue de la délivrance du diplôme. Il permet à l'étudiant de mettre en pratique les connaissances théoriques acquises.</p>
+        </div>
+
+        <!-- Article 3 -->
+        <div class="section">
+            <p class="article-title">Article 3 : Durée et période du stage</p>
+            <p>Le stage aura une durée de <strong>{{ $convention->date_debut->diffInDays($convention->date_fin) ?? '................' }}</strong> jours.</p>
+            <p>Il se déroulera du <strong>{{ $convention->date_debut->format('d/m/Y') ?? '...............' }}</strong> au <strong>{{ $convention->date_fin->format('d/m/Y') ?? '...............' }}</strong>.</p>
+        </div>
+
+        <!-- Article 4 -->
+        <div class="section">
+            <p class="article-title">Article 4 : Sujet du stage</p>
+            <div class="field-group"><span class="field-label">Intitulé du sujet :</span> <span class="field-value-wide">{{ $convention->intitule_stage ?? '........................' }}</span></div>
+            <div class="field-group"><span class="field-label">Service / Département :</span> <span class="field-value">{{ $convention->service ?? '........................' }}</span></div>
+        </div>
+
+        <!-- Article 5 -->
+        <div class="section">
+            <p class="article-title">Article 5 : Encadrement</p>
+            <p><strong>a) Au sein de l'Entreprise :</strong></p>
+            <div class="field-group">Maître de stage : <span class="field-value-wide">{{ $convention->maitre_stage ?? '........................' }}</span></div>
+            <div class="field-group">Téléphone : <span class="field-value">{{ $convention->maitre_stage_tel ?? '........................' }}</span></div>
+            <div class="field-group">Email : <span class="field-value-wide">{{ $convention->maitre_stage_email ?? '........................' }}</span></div>
+            
+            <p><strong>b) A la Faculté :</strong></p>
+            <div class="field-group">Encadrant : <span class="field-value-wide">{{ $convention->encadrant->prenom ?? '' }} {{ $convention->encadrant->nom ?? '........................' }}</span></div>
+            <div class="field-group">Qualité : <span class="field-value">{{ $convention->encadrant->specialite ?? 'Enseignant-Chercheur' }}</span></div>
+            <div class="field-group">Email : <span class="field-value-wide">{{ $convention->encadrant->email ?? '........................' }}</span></div>
+        </div>
+
+        <!-- Article 6 -->
+        <div class="section">
+            <p class="article-title">Article 6 : Horaires</p>
+            <p class="article">Le(stagiaire) sera soumis aux horaires de l'Organisme d'Accueil. Il bénéficiera des mêmes facilités accordées aux employé(e)s de l'Entreprise.</p>
+        </div>
+
+        <!-- Article 7 -->
+        <div class="section">
+            <p class="article-title">Article 7 : Gratification</p>
+            <p class="article">Le stage est non rémunéré. Toutefois, l'Organisme d'Accueil peut octroyer une gratification selon ses propres dispositions.</p>
+        </div>
+
+        <!-- Article 8 -->
+        <div class="section">
+            <p class="article-title">Article 8 : Responsabilité et Assurance</p>
+            <p class="article">Le(stagiaire) doit être couvert par une assurance responsabilité civile individuelle. L'Entreprise décline toute responsabilité en cas d'accident survenu en dehors des lieux de stage.</p>
+        </div>
+
+        <!-- Article 9 -->
+        <div class="section">
+            <p class="article-title">Article 9 : Discipline</p>
+            <p class="article">Le(stagiaire) doit respecter le règlement intérieur de l'Entreprise, notamment en matière d'hygiène et de sécurité. En cas de manquement grave, l'Entreprise peut mettre fin au stage.</p>
+        </div>
+
+        <!-- Article 10 -->
+        <div class="section">
+            <p class="article-title">Article 10 : Confidentialité</p>
+            <p class="article">Le(stagiaire) s'engage à garder strictement confidentielles toutes les informations relatives à l'Entreprise et à ne pas les utiliser à des fins personnelles ou de publication sans accord préalable.</p>
+        </div>
+
+        <!-- Article 11 -->
+        <div class="section">
+            <p class="article-title">Article 11 : Rapports et Evaluation</p>
+            <p class="article">A la fin du stage, l'Entreprise remettra au(stagiaire) une attestation de stage et une fiche d'évaluation. Le(stagiaire) devra remettre un rapport de stage à la Faculté.</p>
+        </div>
+
+        <!-- Article 12 -->
+        <div class="section">
+            <p class="article-title">Article 12 : Interruption du stage</p>
+            <p class="article">En cas d'interruption pour raison médicale ou tout autre motif légitime, la présente convention sera suspenduelimited Upon resume of the stage, a new attestation will be delivered.</p>
+        </div>
+
+        <!-- Article 13 -->
+        <div class="section">
+            <p class="article-title">Article 13 : Droit applicable</p>
+            <p class="article">La présente convention est régie par le droit marocain. Tout litige sera soumis aux tribunaux compétents du Maroc.</p>
+        </div>
+
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #000;">
+
+        <!-- Signatures -->
+        <p style="text-align: center; font-style: italic; margin-bottom: 20px;">Lu et approuvé</p>
+        
+        <table class="signatures-table">
+            <tr>
+                <td class="sig-cell">
+                    <div class="sig-title">Le Stagiaire</div>
+                    <span class="sig-date">Marrakech, le {{ $convention->date_signature_etudiant ?? '............' }}</span>
+                    @if($convention->date_signature_etudiant)
+                        <div class="status-signed">✓ Signé numériquement</div>
+                    @else
+                        <div class="status-pending">En attente de signature</div>
+                    @endif
+                </td>
+                <td class="sig-cell">
+                    <div class="sig-title">L'Organisme d'Accueil</div>
+                    <span class="sig-date">Marrakech, le {{ $convention->date_signature_entreprise ?? '............' }}</span>
+                    @if($convention->date_signature_entreprise)
+                        <div class="status-signed">✓ Signé numériquement</div>
+                    @else
+                        <div class="status-pending">En attente de signature</div>
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td class="sig-cell">
+                    <div class="sig-title">Le Responsable de Filière</div>
+                    <span class="sig-date">Marrakech, le {{ $convention->date_signature_chef ?? '............' }}</span>
+                    @if($convention->date_signature_chef)
+                        <div class="status-signed">✓ Signé numériquement</div>
+                    @else
+                        <div class="status-pending">En attente de signature</div>
+                    @endif
+                </td>
+                <td class="sig-cell">
+                    <div class="sig-title">Le Doyen</div>
+                    <span class="sig-date">Marrakech, le {{ $convention->date_signature_doyen ?? '............' }}</span>
+                    @if($convention->date_signature_doyen)
+                        <div class="status-signed">✓ Signé numériquement</div>
+                    @else
+                        <div class="status-pending">En attente de signature</div>
+                    @endif
+                </td>
+            </tr>
+        </table>
+
+        <div class="footer">
+            BP 549, Av. Abdelkrim El Khattabi, Guéliz, Marrakech - Tél: +212 524 43 34 04 - Fax: +212 524 43 31 70
         </div>
     </div>
-
-    {{-- Footer --}}
-    <div class="footer">
-        كلية العلوم و التقنيات – شارع عبد الكريم الخطابي ص ب 549 مراكش المغرب &nbsp;|&nbsp;
-        Faculté des Sciences et Techniques, Avenue Abdelkrim Khattabi BP 549 Marrakech Maroc
-        Tel : 212 524 43 34 04 / 43 31 63 &nbsp; Fax : 212 524 43 31 70
-    </div>
-
 </body>
 </html>

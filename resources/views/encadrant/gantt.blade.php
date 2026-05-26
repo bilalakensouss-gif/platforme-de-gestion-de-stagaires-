@@ -20,7 +20,7 @@
         </div>
         <a href="{{ route('encadrant.etudiant.show', $conv->id) }}"
            class="btn btn-primary btn-sm">
-            Modifier
+            VOIR DÉTAILS
         </a>
     </div>
     <div class="card-body" style="padding:0;">

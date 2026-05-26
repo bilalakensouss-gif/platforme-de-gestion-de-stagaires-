@@ -395,8 +395,7 @@
             </div>
 
             <h2>
-                Bienvenue sur la<br>
-                <span>Plateforme Stages</span>
+                Bienvenue 
             </h2>
 
             <p>
@@ -404,36 +403,7 @@
                 suivi pédagogique en un seul endroit sécurisé.
             </p>
 
-            <div class="lp-features">
-                <div class="lp-feature">
-                    <div class="lp-feature-icon">📄</div>
-                    <div class="lp-feature-text">
-                        <div class="title">Conventions numériques</div>
-                        <div class="desc">Génération automatique TYPE 1 & TYPE 2</div>
-                    </div>
-                </div>
-                <div class="lp-feature">
-                    <div class="lp-feature-icon">✍️</div>
-                    <div class="lp-feature-text">
-                        <div class="title">Signatures numériques</div>
-                        <div class="desc">Circuit de 4 signatures séquentiel</div>
-                    </div>
-                </div>
-                <div class="lp-feature">
-                    <div class="lp-feature-icon">📊</div>
-                    <div class="lp-feature-text">
-                        <div class="title">Suivi Gantt</div>
-                        <div class="desc">Suivi de l'avancement en temps réel</div>
-                    </div>
-                </div>
-                <div class="lp-feature">
-                    <div class="lp-feature-icon">🔒</div>
-                    <div class="lp-feature-text">
-                        <div class="title">Accès sécurisé</div>
-                        <div class="desc">Espace dédié par rôle et profil</div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
         {{-- Right panel - form --}}
@@ -510,12 +480,7 @@
                         <path d="M8 3l5 5-5 5M3 8h10"/>
                     </svg>
                 </a>
-                <a href="{{ route('entreprise.login') }}" class="entreprise-link">
-                    Espace Entreprise
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M8 3l5 5-5 5M3 8h10"/>
-                    </svg>
-                </a>
+                
             </div>
 
         </div>

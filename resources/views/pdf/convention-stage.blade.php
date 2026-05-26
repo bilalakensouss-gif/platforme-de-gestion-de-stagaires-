@@ -16,25 +16,18 @@
             border-bottom: 2px solid #000;
             padding-bottom: 10px;
         }
-        .logo-area {
-            display: table;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        .logo-text {
-            display: table-cell;
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-        }
         .faculty-name {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
-            color: #c00;
         }
         .university-name {
             font-size: 11px;
+            color: #333;
+        }
+        .contact-info {
+            font-size: 9px;
             color: #555;
+            margin-top: 5px;
         }
         .title {
             text-align: center;
@@ -48,9 +41,6 @@
             margin-bottom: 15px;
             line-height: 1.8;
         }
-        .field-line {
-            margin-bottom: 6px;
-        }
         .field-label {
             font-weight: bold;
             display: inline;
@@ -58,7 +48,6 @@
         .field-value {
             display: inline;
             border-bottom: 1px solid #000;
-            min-width: 200px;
             padding-bottom: 1px;
         }
         .article-title {
@@ -71,73 +60,62 @@
             line-height: 1.7;
         }
         .signatures {
-            margin-top: 30px;
-            display: table;
+            margin-top: 40px;
             width: 100%;
         }
-        .sig-col {
-            display: table-cell;
+        .signatures table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .signatures td {
             width: 33%;
             text-align: center;
-            vertical-align: top;
             padding: 10px 5px;
+            vertical-align: top;
         }
         .sig-title {
             font-weight: bold;
-            margin-bottom: 8px;
             font-size: 11px;
+            margin-bottom: 8px;
         }
         .sig-date {
             font-size: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
-        .sig-name {
-            font-size: 10px;
-            color: #555;
-            margin-top: 5px;
-        }
-        .sig-signed {
+        .signed {
             color: green;
             font-size: 10px;
         }
-        .sig-pending {
-            color: #999;
+        .not-signed {
+            color: #aaa;
             font-size: 10px;
             font-style: italic;
         }
         .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            margin-top: 20px;
             text-align: center;
             font-size: 9px;
             color: #555;
             border-top: 1px solid #000;
-            padding: 5px 20px;
+            padding-top: 8px;
         }
         .divider {
             border: none;
             border-top: 1px solid #000;
             margin: 15px 0;
         }
-        .indent {
-            margin-left: 20px;
-        }
+        .indent { margin-left: 20px; }
     </style>
 </head>
 <body>
 
-    {{-- Header avec logo FST --}}
+    {{-- En-tête --}}
     <div class="header">
-        <div style="text-align:center; margin-bottom:8px;">
-            <span class="faculty-name">كلية العلــــوم والتقنيات - مراكش</span><br>
-            <span style="font-size:13px; font-weight:bold;">FACULTÉ DES SCIENCES ET TECHNIQUES</span><br>
-            <span class="university-name">Université Cadi Ayyad — MARRAKECH</span>
-        </div>
-        <div style="font-size:9px; color:#555;">
+        <div class="faculty-name">FACULTÉ DES SCIENCES ET TECHNIQUES</div>
+        <div class="university-name">Université Cadi Ayyad — MARRAKECH</div>
+        <div class="contact-info">
             Faculté des Sciences et Techniques, Avenue Abdelkrim Khattabi BP 549 Marrakech Maroc
-            Tel : 212 524 43 34 04 / 43 31 63 &nbsp; Fax : 212 524 43 31 70
+            &nbsp;|&nbsp; Tel : 212 524 43 34 04 / 43 31 63 &nbsp;|&nbsp; Fax : 212 524 43 31 70
         </div>
     </div>
 
@@ -148,11 +126,9 @@
     <div class="section">
         <p>Entre :</p>
         <p class="indent">- d'une part :</p>
-        <p>
-            La Faculté des Sciences et Techniques de Marrakech, représentée par son Doyen
-            Monsieur <strong>{{ $doyen ?? 'SAID RAKRAK' }}</strong>
-        </p>
-        <p>Adresse &nbsp;&nbsp; : BP 524, AV. Abdelkrim El Khattabi, Guéliz, Marrakech, Maroc.</p>
+        <p>La Faculté des Sciences et Techniques de Marrakech, représentée par son Doyen
+            Monsieur <strong>{{ $doyen ?? 'SAID RAKRAK' }}</strong></p>
+        <p>Adresse &nbsp;&nbsp;&nbsp;: BP 524, AV. Abdelkrim El Khattabi, Guéliz, Marrakech, Maroc.</p>
         <p>Téléphone : +212 524 43 34 04</p>
         <p>Fax &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: +212 524 43 31 70</p>
         <p>Et désignée ci après par <strong>Etablissement de formation</strong>.</p>
@@ -160,97 +136,122 @@
 
     <div class="section">
         <p class="indent">- Et d'autre part :</p>
-        <p><span class="field-label">Nom &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
-            <span class="field-value"> {{ $convention->entreprise->raison_sociale }}</span></p>
-        <p><span class="field-label">Adresse &nbsp;&nbsp;&nbsp;:</span>
-            <span class="field-value"> {{ $convention->entreprise->adresse }}</span></p>
-        <p><span class="field-label">Téléphone :</span>
-            <span class="field-value"> {{ $convention->entreprise->telephone ?? '—' }}</span></p>
-        <p><span class="field-label">Fax &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
-            <span class="field-value"> —</span></p>
-        <p><span class="field-label">Représenté par :</span>
-            <span class="field-value"> {{ $convention->maitre_stage ?? '—' }}</span></p>
+        <p>
+            <span class="field-label">Nom &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
+            <span class="field-value">
+                {{ $convention->entreprise?->raison_sociale ?? $convention->entreprise_nom }}
+            </span>
+        </p>
+        <p>
+            <span class="field-label">Adresse &nbsp;&nbsp;&nbsp;:</span>
+            <span class="field-value">
+                {{ $convention->entreprise?->adresse ?? $convention->entreprise_adresse }}
+            </span>
+        </p>
+        <p>
+            <span class="field-label">Téléphone :</span>
+            <span class="field-value">
+                {{ $convention->entreprise_telephone ?? $convention->entreprise?->telephone ?? 'A compléter' }}
+            </span>
+        </p>
+        <p>
+            <span class="field-label">Fax &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
+            <span class="field-value">
+                {{ $convention->entreprise_fax ?? $convention->entreprise?->fax ?? 'A compléter' }}
+            </span>
+        </p>
+        <p>
+            <span class="field-label">Représenté par :</span>
+            <span class="field-value">
+                {{ $convention->entreprise_representant ?? $convention->maitre_stage ?? 'A compléter' }}
+            </span>
+        </p>
         <p>Et désigné ci-après par <strong>l'entreprise</strong>.</p>
     </div>
 
     <div class="section">
         <p>Elle concerne :</p>
-        <p><span class="field-label">Etudiant/Etudiante :</span>
+        <p>
+            <span class="field-label">Etudiant/Etudiante :</span>
             <span class="field-value">
                 {{ $convention->etudiant->prenom }} {{ $convention->etudiant->nom }}
             </span>
         </p>
         <p>
-            Etudiant(e) régulièrement inscrit(e) dans l'établissement pour l'année universitaire
-            {{ date('Y') }}/{{ date('Y') + 1 }} et dont la carte d'étudiant porte le numéro
-            du Code Masar suivant : ………………………
+            Etudiant(e) régulièrement inscrit(e) dans l'établissement pour l'année
+            universitaire {{ date('Y') }}/{{ date('Y') + 1 }} et dont la carte d'étudiant
+            porte le numéro du Code Masar suivant :
+            <span class="field-value">
+                {{ $convention->etudiant->code_masar ?? '................................' }}
+            </span>
         </p>
         <p>Et dénommé ci-après <strong>le stagiaire</strong>.</p>
     </div>
 
     <hr class="divider">
 
-    {{-- Articles --}}
     <div class="section">
         <p class="article-title">Article 1 :</p>
         <p class="article-content">
-            La présente convention régit les rapports des deux parties, dans le cadre de l'organisation
-            de stage d'entreprise conformément aux conditions fixées à la présente convention.
+            La présente convention régit les rapports des deux parties, dans le cadre
+            de l'organisation de stage d'entreprise conformément aux conditions fixées
+            à la présente convention.
         </p>
     </div>
 
     <div class="section">
         <p class="article-title">Article 2 :</p>
         <p class="article-content">
-            Le programme du stage est élaboré par le personnel chargé de l'encadrement du stagiaire,
-            en tenant compte du programme et de spécialité des études du stagiaire, ainsi que des moyens
-            humain et matériel de l'entreprise. Cette dernière se réserve le droit de réorienter
-            l'apprentissage en fonction des qualifications du stagiaire et du rythme de ses activités
-            professionnelles.
+            Le programme du stage est élaboré par le personnel chargé de l'encadrement
+            du stagiaire, en tenant compte du programme et de spécialité des études du
+            stagiaire, ainsi que des moyens humain et matériel de l'entreprise. Cette
+            dernière se réserve le droit de réorienter l'apprentissage en fonction des
+            qualifications du stagiaire et du rythme de ses activités professionnelles.
         </p>
     </div>
 
     <div class="section">
         <p class="article-title">Article 3 :</p>
         <p class="article-content">
-            Pendant le stage, le stagiaire est soumis aux usages et règlements de l'entreprise,
-            notamment en matière de discipline et des horaires. En cas de manquement à ces règles,
-            l'entreprise se réserve le droit de mettre fin au stage, après avoir prévenu l'établissement
-            de formation.
+            Pendant le stage, le stagiaire est soumis aux usages et règlements de
+            l'entreprise, notamment en matière de discipline et des horaires. En cas de
+            manquement à ces règles, l'entreprise se réserve le droit de mettre fin au
+            stage, après avoir prévenu l'établissement de formation.
         </p>
     </div>
 
     <div class="section">
         <p class="article-title">Article 4 :</p>
         <p class="article-content">
-            Au terme de son stage, le stagiaire remettra un rapport de stage à l'entreprise si réclamé
-            par celle-ci.
+            Au terme de son stage, le stagiaire remettra un rapport de stage à
+            l'entreprise si réclamé par celle-ci.
         </p>
     </div>
 
     <div class="section">
         <p class="article-title">Article 5 :</p>
         <p class="article-content">
-            Le stagiaire s'engage à garder confidentielle toute information recueillie dans l'entreprise,
-            et à n'utiliser en aucun cas ces informations pour faire l'objet d'une publication,
-            communication à des tiers, conférences, sans l'accord préalable de l'entreprise.
+            Le stagiaire s'engage à garder confidentielle toute information recueillie
+            dans l'entreprise, et à n'utiliser en aucun cas ces informations pour faire
+            l'objet d'une publication, communication à des tiers, conférences, sans
+            l'accord préalable de l'entreprise.
         </p>
     </div>
 
     <div class="section">
         <p class="article-title">Article 6 :</p>
         <p class="article-content">
-            Le stagiaire est tenu de souscrire une assurance pour la garantir contre les risques
-            d'accident ou d'incident auxquels le stagiaire pourrait être exposé durant la période
-            de son stage.
+            Le stagiaire est tenu de souscrire une assurance pour la garantir contre
+            les risques d'accident ou d'incident auxquels le stagiaire pourrait être
+            exposé durant la période de son stage.
         </p>
     </div>
 
     <div class="section">
         <p class="article-title">Article 7 :</p>
         <p class="article-content">
-            En cas de non-respect de l'une des clauses de cette convention aussi bien par le stagiaire,
-            l'entreprise se réserve le droit de mettre fin à ce stage.
+            En cas de non-respect de l'une des clauses de cette convention aussi bien
+            par le stagiaire, l'entreprise se réserve le droit de mettre fin à ce stage.
         </p>
     </div>
 
@@ -262,11 +263,11 @@
             au
             <strong>{{ $convention->date_fin->format('d/m/Y') }}</strong>
         </p>
-        @if($convention->service)
-        <p>Service / Département : <strong>{{ $convention->service }}</strong></p>
-        @endif
         @if($convention->intitule_stage)
-        <p>Intitulé du stage : <strong>{{ $convention->intitule_stage }}</strong></p>
+            <p>Intitulé du stage : <strong>{{ $convention->intitule_stage }}</strong></p>
+        @endif
+        @if($convention->service)
+            <p>Service / Département : <strong>{{ $convention->service }}</strong></p>
         @endif
     </div>
 
@@ -274,80 +275,89 @@
 
     {{-- Signatures --}}
     <div class="signatures">
-        <div class="sig-col">
-            <p class="sig-title">Pour l'entreprise</p>
-            <p class="sig-date">{{ $convention->entreprise->raison_sociale }}, le
-                @if($convention->date_signature_entreprise)
-                    {{ $convention->date_signature_entreprise->format('d/m/Y') }}
+        <table>
+            <tr>
+                <td>
+                    <div class="sig-title">Pour l'entreprise</div>
+                    <div class="sig-date">
+                        {{ $convention->entreprise?->raison_sociale ?? $convention->entreprise_nom }}, le
+                        @if($convention->date_signature_entreprise)
+                            {{ $convention->date_signature_entreprise->format('d/m/Y') }}
+                        @else
+                            …/…/………
+                        @endif
+                    </div>
+                    @if($convention->date_signature_entreprise)
+                        <div class="signed">✓ Signé numériquement</div>
+                    @else
+                        <div class="not-signed">En attente de signature</div>
+                    @endif
+                </td>
+
+                <td>
+                    <div class="sig-title">Le stagiaire</div>
+                    <div style="font-size:9px;">Lu et approuvé</div>
+                    <div class="sig-date">
+                        Marrakech, le
+                        @if($convention->date_signature_etudiant)
+                            {{ $convention->date_signature_etudiant->format('d/m/Y') }}
+                        @else
+                            …/…/………
+                        @endif
+                    </div>
+                    @if($convention->date_signature_etudiant)
+                        <div class="signed">✓ Signé numériquement</div>
+                        <div style="font-size:10px; color:#333; margin-top:3px;">
+                            {{ $convention->etudiant->prenom }} {{ $convention->etudiant->nom }}
+                        </div>
+                    @else
+                        <div class="not-signed">En attente de signature</div>
+                    @endif
+                </td>
+
+                <td>
+                    <div class="sig-title">Le responsable de la filière</div>
+                    <div class="sig-date">
+                        Marrakech, le
+                        @if($convention->date_signature_chef)
+                            {{ $convention->date_signature_chef->format('d/m/Y') }}
+                        @else
+                            …/…/………
+                        @endif
+                    </div>
+                    @if($convention->date_signature_chef)
+                        <div class="signed">✓ Signé numériquement</div>
+                    @else
+                        <div class="not-signed">En attente de signature</div>
+                    @endif
+                </td>
+            </tr>
+        </table>
+
+        {{-- Doyen centré --}}
+        <div style="text-align:center; margin-top:20px; padding-top:15px;
+                    border-top:1px solid #ddd;">
+            <div class="sig-title">Le Doyen</div>
+            <div class="sig-date">
+                Marrakech, le
+                @if($convention->date_signature_doyen)
+                    {{ $convention->date_signature_doyen->format('d/m/Y') }}
                 @else
                     …/…/………
                 @endif
-            </p>
-            @if($convention->date_signature_entreprise)
-                <p class="sig-signed">✓ Signé numériquement</p>
-            @else
-                <p class="sig-pending">En attente de signature</p>
-            @endif
-        </div>
-
-        <div class="sig-col">
-            <p class="sig-title">Le stagiaire</p>
-            <p style="font-size:10px;">Lu et approuvé</p>
-            <p class="sig-date">Marrakech, le
-                @if($convention->date_signature_etudiant)
-                    {{ $convention->date_signature_etudiant->format('d/m/Y') }}
-                @else
-                    …/…/………
-                @endif
-            </p>
-            @if($convention->date_signature_etudiant)
-                <p class="sig-signed">✓ Signé numériquement</p>
-                <p class="sig-name">
-                    {{ $convention->etudiant->prenom }} {{ $convention->etudiant->nom }}
-                </p>
-            @else
-                <p class="sig-pending">En attente de signature</p>
-            @endif
-        </div>
-
-        <div class="sig-col">
-            <p class="sig-title">Le responsable de la filière</p>
-            <p class="sig-date">Marrakech, le
-                @if($convention->date_signature_chef)
-                    {{ $convention->date_signature_chef->format('d/m/Y') }}
-                @else
-                    …/…/………
-                @endif
-            </p>
-            @if($convention->date_signature_chef)
-                <p class="sig-signed">✓ Signé numériquement</p>
-            @else
-                <p class="sig-pending">En attente de signature</p>
-            @endif
-        </div>
-    </div>
-
-    <div style="text-align:center; margin-top:15px;">
-        <p class="sig-title">Le Doyen</p>
-        <p class="sig-date">Marrakech, le
+            </div>
             @if($convention->date_signature_doyen)
-                {{ $convention->date_signature_doyen->format('d/m/Y') }}
+                <div class="signed">✓ Signé numériquement</div>
             @else
-                …/…/………
+                <div class="not-signed">En attente de signature</div>
             @endif
-        </p>
-        @if($convention->date_signature_doyen)
-            <p class="sig-signed">✓ Signé numériquement</p>
-        @else
-            <p class="sig-pending">En attente de signature</p>
-        @endif
+        </div>
     </div>
 
     {{-- Footer --}}
     <div class="footer">
-        كلية العلوم و التقنيات – شارع عبد الكريم الخطابي ص ب 549 مراكش المغرب &nbsp;|&nbsp;
         Faculté des Sciences et Techniques, Avenue Abdelkrim Khattabi BP 549 Marrakech Maroc
-        Tel : 212 524 43 34 04 / 43 31 63 &nbsp; Fax : 212 524 43 31 70
+        &nbsp;|&nbsp; Tel : 212 524 43 34 04 / 43 31 63 &nbsp;|&nbsp; Fax : 212 524 43 31 70
     </div>
 
 </body>

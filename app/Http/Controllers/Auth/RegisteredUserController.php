@@ -25,6 +25,7 @@ class RegisteredUserController extends Controller
             'nom'      => 'required|string|max:255',
             'prenom'   => 'required|string|max:255',
             'filiere'  => 'required|string|max:255',
+            'code_masar' => 'nullable|string|max:50',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -33,6 +34,7 @@ class RegisteredUserController extends Controller
             'nom'      => $request->nom,
             'prenom'   => $request->prenom,
             'filiere'  => $request->filiere,
+            'code_masar' => $request->code_masar,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
             'role'     => 'etudiant',

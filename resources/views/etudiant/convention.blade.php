@@ -25,21 +25,51 @@
                             : 'PFE (TYPE 2)' }}
                     </p>
                 </div>
+
                 <div>
                     <p style="color:#888; font-size:12px;">Entreprise</p>
-                    <p style="font-weight:600;">{{ $convention->entreprise->raison_sociale }}</p>
+                    <p style="font-weight:600;">
+                        {{-- On utilise les champs directs, plus fiable que la relation --}}
+                        {{ $convention->entreprise_nom
+                            ?? $convention->entreprise->raison_sociale
+                            ?? 'Non renseignée' }}
+                    </p>
                 </div>
+
                 <div>
                     <p style="color:#888; font-size:12px;">Intitulé</p>
                     <p style="font-weight:600;">{{ $convention->intitule_stage }}</p>
                 </div>
+
                 <div>
                     <p style="color:#888; font-size:12px;">Période</p>
                     <p style="font-weight:600;">
-                        {{ $convention->date_debut->format('d/m/Y') }} →
-                        {{ $convention->date_fin->format('d/m/Y') }}
+                        {{ \Carbon\Carbon::parse($convention->date_debut)->format('d/m/Y') }} →
+                        {{ \Carbon\Carbon::parse($convention->date_fin)->format('d/m/Y') }}
                     </p>
                 </div>
+
+                @if($convention->entreprise_adresse)
+                <div>
+                    <p style="color:#888; font-size:12px;">Adresse entreprise</p>
+                    <p style="font-weight:600;">{{ $convention->entreprise_adresse }}</p>
+                </div>
+                @endif
+
+                @if($convention->maitre_stage)
+                <div>
+                    <p style="color:#888; font-size:12px;">Maître de stage</p>
+                    <p style="font-weight:600;">{{ $convention->maitre_stage }}</p>
+                </div>
+                @endif
+
+                @if($convention->service)
+                <div>
+                    <p style="color:#888; font-size:12px;">Service</p>
+                    <p style="font-weight:600;">{{ $convention->service }}</p>
+                </div>
+                @endif
+
                 @if($convention->encadrant)
                 <div>
                     <p style="color:#888; font-size:12px;">Encadrant</p>
@@ -74,9 +104,11 @@
                 <div style="flex:1;">
                     <p style="font-weight:600; margin:0;">Doyen</p>
                     <p style="color:#888; font-size:12px; margin:2px 0 0;">
-                        {{ $convention->date_signature_doyen
-                            ? '✓ Signé le '.$convention->date_signature_doyen->format('d/m/Y')
-                            : 'En attente' }}
+                        @if($convention->date_signature_doyen)
+                            ✓ Signé le {{ \Carbon\Carbon::parse($convention->date_signature_doyen)->format('d/m/Y') }}
+                        @else
+                            En attente
+                        @endif
                     </p>
                 </div>
             </div>
@@ -89,9 +121,11 @@
                 <div style="flex:1;">
                     <p style="font-weight:600; margin:0;">Chef de Filière</p>
                     <p style="color:#888; font-size:12px; margin:2px 0 0;">
-                        {{ $convention->date_signature_chef
-                            ? '✓ Signé le '.$convention->date_signature_chef->format('d/m/Y')
-                            : 'En attente' }}
+                        @if($convention->date_signature_chef)
+                            ✓ Signé le {{ \Carbon\Carbon::parse($convention->date_signature_chef)->format('d/m/Y') }}
+                        @else
+                            En attente
+                        @endif
                     </p>
                 </div>
             </div>
@@ -104,9 +138,11 @@
                 <div style="flex:1;">
                     <p style="font-weight:600; margin:0;">Étudiant</p>
                     <p style="color:#888; font-size:12px; margin:2px 0 0;">
-                        {{ $convention->date_signature_etudiant
-                            ? '✓ Signé le '.$convention->date_signature_etudiant->format('d/m/Y')
-                            : 'En attente' }}
+                        @if($convention->date_signature_etudiant)
+                            ✓ Signé le {{ \Carbon\Carbon::parse($convention->date_signature_etudiant)->format('d/m/Y') }}
+                        @else
+                            En attente
+                        @endif
                     </p>
                 </div>
                 @if(!$convention->date_signature_etudiant && $convention->date_signature_chef)
@@ -126,9 +162,11 @@
                 <div style="flex:1;">
                     <p style="font-weight:600; margin:0;">Entreprise</p>
                     <p style="color:#888; font-size:12px; margin:2px 0 0;">
-                        {{ $convention->date_signature_entreprise
-                            ? '✓ Signé le '.$convention->date_signature_entreprise->format('d/m/Y')
-                            : 'En attente' }}
+                        @if($convention->date_signature_entreprise)
+                            ✓ Signé le {{ \Carbon\Carbon::parse($convention->date_signature_entreprise)->format('d/m/Y') }}
+                        @else
+                            En attente
+                        @endif
                     </p>
                 </div>
             </div>

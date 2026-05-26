@@ -14,6 +14,19 @@ class ConventionPdfController extends Controller
     // =====================
     private function generatePdf(Convention $convention)
     {
+        // ✅ FIX: Add ALL required fields including email_contact
+        if (!$convention->entreprise && $convention->entreprise_nom) {
+            $convention->setRelation('entreprise', (object)[
+                'raison_sociale' => $convention->entreprise_nom,
+                'adresse'       => $convention->entreprise_adresse,
+                'telephone'     => $convention->entreprise_telephone,
+                'fax'           => $convention->entreprise_fax,
+                'email_contact' => $convention->entreprise_email,  // ✅ THIS WAS MISSING
+                'representant'  => $convention->entreprise_representant,
+                'secteur'       => $convention->entreprise_secteur,
+            ]);
+        }
+
         // Choisir le template selon le type
         $view = $convention->type === 'stage_classique'
             ? 'pdf.convention-stage'

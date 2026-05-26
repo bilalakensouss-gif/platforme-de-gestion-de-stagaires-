@@ -23,9 +23,17 @@
             <tbody>
                 @forelse($conventions as $conv)
                 <tr>
-                    <td>{{ $conv->etudiant->prenom }} {{ $conv->etudiant->nom }}</td>
-                    <td>{{ $conv->entreprise->raison_sociale }}</td>
-                    <td>{{ $conv->type === 'stage_classique' ? 'Stage classique' : 'PFE' }}</td>
+                    {{-- Protection null sur étudiant et entreprise --}}
+                    <td>
+                        {{ $conv->etudiant->prenom ?? '' }}
+                        {{ $conv->etudiant->nom ?? 'Étudiant inconnu' }}
+                    </td>
+                    <td>
+                        {{ $conv->entreprise->raison_sociale ?? 'Entreprise introuvable' }}
+                    </td>
+                    <td>
+                        {{ $conv->type === 'stage_classique' ? 'Stage classique' : 'PFE' }}
+                    </td>
                     <td>
                         @if($conv->etat === 'signee')
                             <span class="badge badge-success">Signée</span>

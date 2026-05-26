@@ -7,7 +7,7 @@
 <div class="card" style="max-width:700px;">
     <div class="card-header">
         <h3>Nouvelle entreprise</h3>
-        <a href="{{ route('doyen.utilisateurs') }}" class="btn btn-secondary btn-sm">
+        <a href="{{ route('admin.entreprises') }}" class="btn btn-secondary btn-sm">
             ← Retour
         </a>
     </div>
@@ -15,13 +15,11 @@
 
         @if($errors->any())
             <div class="alert alert-danger">
-                @foreach($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
+                @foreach($errors->all() as $error)<p>⚠️ {{ $error }}</p>@endforeach
             </div>
         @endif
 
-        <form method="POST" action="{{ route('doyen.entreprises.store') }}">
+        <form method="POST" action="{{ route('admin.entreprises.store') }}">
             @csrf
 
             <div class="form-group">
@@ -41,27 +39,6 @@
                 <input type="text" name="secteur" class="form-control"
                        value="{{ old('secteur') }}">
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-    <div class="form-group">
-        <label class="form-label">Téléphone</label>
-        <input type="text" name="telephone" class="form-control"
-               value="{{ old('telephone') }}"
-               placeholder="+212 5XX XX XX XX">
-    </div>
-    <div class="form-group">
-        <label class="form-label">Fax</label>
-        <input type="text" name="fax" class="form-control"
-               value="{{ old('fax') }}"
-               placeholder="+212 5XX XX XX XX">
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="form-label">Représentant / Responsable</label>
-    <input type="text" name="representant" class="form-control"
-           value="{{ old('representant') }}"
-           placeholder="Nom du responsable">
-</div>
 
             <div class="form-group">
                 <label class="form-label">Email de contact</label>
@@ -75,7 +52,7 @@
                     <input type="password" name="password" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Confirmer le mot de passe</label>
+                    <label class="form-label">Confirmer</label>
                     <input type="password" name="password_confirmation"
                            class="form-control" required>
                 </div>
@@ -85,11 +62,10 @@
                 <button type="submit" class="btn btn-primary">
                     💾 Créer l'entreprise
                 </button>
-                <a href="{{ route('doyen.utilisateurs') }}" class="btn btn-secondary">
+                <a href="{{ route('admin.entreprises') }}" class="btn btn-secondary">
                     Annuler
                 </a>
             </div>
-
         </form>
     </div>
 </div>

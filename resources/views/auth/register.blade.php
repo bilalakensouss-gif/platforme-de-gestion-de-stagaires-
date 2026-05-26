@@ -464,7 +464,12 @@
                         </option>
                     </select>
                 </div>
-
+<div class="form-group">
+    <label class="form-label">Code Masar</label>
+    <input type="text" name="code_masar" class="form-input"
+           value="{{ old('code_masar') }}"
+           placeholder="Votre numéro Code Masar">
+</div>
                 <div class="form-group">
                     <label class="form-label">Adresse email</label>
                     <input type="email" name="email" class="form-input"

@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('password');
 
             // Rôle
-            $table->enum('role', [
-                'etudiant',
-                'chef_filiere',
-                'doyen',
-                'encadrant',
-            ])->default('etudiant');
+           $table->enum('role', [
+    'admin',
+    'doyen',
+    'chef_filiere',
+    'etudiant',
+    'encadrant',
+])->default('etudiant');
 
             // Filière (pour étudiant et chef de filière)
             $table->string('filiere')->nullable();

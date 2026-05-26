@@ -11,10 +11,19 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Doyen (= Administrateur)
+        // Admin (gestionnaire système)
         User::create([
-            'nom'      => 'Alami',
-            'prenom'   => 'Mohammed',
+            'nom'      => 'Admin',
+            'prenom'   => 'System',
+            'email'    => 'admin@fst.ma',
+            'password' => Hash::make('password'),
+            'role'     => 'admin',
+        ]);
+
+        // Doyen (signature uniquement)
+        User::create([
+            'nom'      => 'Rakrak',
+            'prenom'   => 'Said',
             'email'    => 'doyen@fst.ma',
             'password' => Hash::make('password'),
             'role'     => 'doyen',
@@ -48,15 +57,6 @@ class DatabaseSeeder extends Seeder
             'password'   => Hash::make('password'),
             'role'       => 'encadrant',
             'specialite' => 'Réseaux & Systèmes',
-        ]);
-
-        // Entreprise
-        Entreprise::create([
-            'raison_sociale' => 'ONCF Marrakech',
-            'adresse'        => 'Avenue Hassan II, Marrakech',
-            'secteur'        => 'Transport',
-            'email_contact'  => 'entreprise@oncf.ma',
-            'password'       => Hash::make('password'),
         ]);
     }
 }

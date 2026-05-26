@@ -8,24 +8,33 @@ use Illuminate\Database\Eloquent\Model;
 class Convention extends Model
 {
     protected $fillable = [
-        'etudiant_id',
-        'entreprise_id',
-        'encadrant_id',
-        'type',
-        'etat',
-        'etape_signature',
-        'intitule_stage',
-        'date_debut',
-        'date_fin',
-        'service',
-        'maitre_stage',
-        'date_signature_doyen',
-        'date_signature_chef',
-        'date_signature_etudiant',
-        'date_signature_entreprise',
-        'fichier_pdf',
-        'date_creation',
-    ];
+    'etudiant_id',
+    'entreprise_id',
+    'encadrant_id',
+    'type',
+    'etat',
+    'etape_signature',
+    'intitule_stage',
+    'date_debut',
+    'date_fin',
+    'service',
+    'maitre_stage',
+    // Infos entreprise saisies par étudiant
+    'entreprise_nom',
+    'entreprise_adresse',
+    'entreprise_telephone',
+    'entreprise_fax',
+    'entreprise_email',
+    'entreprise_representant',
+    'entreprise_secteur',
+    // Signatures
+    'date_signature_doyen',
+    'date_signature_chef',
+    'date_signature_etudiant',
+    'date_signature_entreprise',
+    'fichier_pdf',
+    'date_creation',
+];
 
     protected $casts = [
         'date_debut'                => 'date',

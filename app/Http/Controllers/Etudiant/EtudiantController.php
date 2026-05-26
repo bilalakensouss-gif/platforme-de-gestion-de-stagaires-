@@ -18,12 +18,45 @@ class EtudiantController extends Controller
     // =====================
     // Dashboard
     // =====================
-    public function gantt()
+    public function updateGantt(Request $request, $id)
+{
+    $request->validate([
+        'progression' => 'required|integer|min:0|max:100',
+        'statut'      => 'required|in:non_commence,en_cours,termine',
+    ]);
+
+    $task = GanttTask::findOrFail($id);
+
+    // Vérifier que la tâche appartient à cet étudiant
+    Convention::where('etudiant_id', auth()->id())
+              ->findOrFail($task->convention_id);
+
+    $task->update([
+        'progression' => $request->progression,
+        'statut'      => $request->statut,
+    ]);
+
+    return back()->with('success', 'Progression mise à jour avec succès.');
+}
+   public function gantt()
 {
     $convention = Convention::with(['etudiant', 'entreprise', 'encadrant'])
                             ->where('etudiant_id', auth()->id())
                             ->latest()
                             ->first();
+
+    // ✅ ADD FALLBACK (same fix)
+    if ($convention && !$convention->entreprise && $convention->entreprise_nom) {
+        $convention->setRelation('entreprise', (object)[
+            'raison_sociale' => $convention->entreprise_nom,
+            'adresse'       => $convention->entreprise_adresse,
+            'telephone'     => $convention->entreprise_telephone,
+            'fax'           => $convention->entreprise_fax,
+            'email_contact' => $convention->entreprise_email,
+            'representant'  => $convention->entreprise_representant,
+            'secteur'       => $convention->entreprise_secteur,
+        ]);
+    }
 
     $tasks = [];
     if ($convention) {
@@ -34,18 +67,25 @@ class EtudiantController extends Controller
 
     return view('etudiant.gantt', compact('convention', 'tasks'));
 }
-    public function dashboard()
-    {
-        $convention = Convention::where('etudiant_id', auth()->id())
-                                ->latest()
-                                ->first();
+   public function dashboard()
+{
+    $convention = Convention::with('entreprise')
+                            ->where('etudiant_id', auth()->id())
+                            ->latest()
+                            ->first();
 
-        $demande = DemandeStage::where('filiere', auth()->user()->filiere)
-                               ->latest()
-                               ->first();
+    $demande = DemandeStage::where('filiere', auth()->user()->filiere)
+                           ->latest()
+                           ->first();
 
-        return view('etudiant.dashboard', compact('convention', 'demande'));
+    // If no related entreprise, use stored company name
+    if ($convention && !$convention->entreprise && $convention->entreprise_nom) {
+        // Store the name temporarily for the view
+        $convention->setRelation('entreprise', (object)['raison_sociale' => $convention->entreprise_nom]);
     }
+
+    return view('etudiant.dashboard', compact('convention', 'demande'));
+}
 
     // =====================
     // Demande de stage
@@ -89,88 +129,80 @@ class EtudiantController extends Controller
         return view('etudiant.convention-create', compact('entreprises'));
     }
 
-    public function storeConvention(Request $request)
-    {
-        $request->validate([
-            'entreprise_id'  => 'required|exists:entreprises,id',
-            'type'           => 'required|in:stage_classique,pfe',
-            'intitule_stage' => 'required|string|max:255',
-            'date_debut'     => 'required|date',
-            'date_fin'       => 'required|date|after:date_debut',
-            'service'        => 'nullable|string|max:255',
-            'maitre_stage'   => 'nullable|string|max:255',
-        ]);
-
-        $convention = Convention::create([
-    'etudiant_id'    => auth()->id(),
-    'entreprise_id'  => $request->entreprise_id,
-    'type'           => $request->type,
-    'intitule_stage' => $request->intitule_stage,
-    'date_debut'     => $request->date_debut,
-    'date_fin'       => $request->date_fin,
-    'service'        => $request->service,
-    'maitre_stage'   => $request->maitre_stage,
-    'etat'           => 'non_signee',
-    'etape_signature'=> 0,
-    'date_creation'  => now(),
-]);
-// Créer les tâches Gantt par défaut
-             $tachesDefaut = [
-    [
-        'titre'       => 'Intégration & découverte de l\'entreprise',
-        'ordre'       => 1,
-        'progression' => 0,
-        'statut'      => 'non_commence',
-    ],
-    [
-        'titre'       => 'Visite et étude des postes sources',
-        'ordre'       => 2,
-        'progression' => 0,
-        'statut'      => 'non_commence',
-    ],
-    [
-        'titre'       => 'Dimensionnement',
-        'ordre'       => 3,
-        'progression' => 0,
-        'statut'      => 'non_commence',
-    ],
-    [
-        'titre'       => 'Étude BT',
-        'ordre'       => 4,
-        'progression' => 0,
-        'statut'      => 'non_commence',
-    ],
-    [
-        'titre'       => 'Suivi & rédaction du rapport',
-        'ordre'       => 5,
-        'progression' => 0,
-        'statut'      => 'non_commence',
-    ],
-    [
-        'titre'       => 'Préparation soutenance',
-        'ordre'       => 6,
-        'progression' => 0,
-        'statut'      => 'non_commence',
-    ],
-];
-
-foreach ($tachesDefaut as $tache) {
-    GanttTask::create([
-        'convention_id' => $convention->id,
-        'etudiant_id'   => auth()->id(),
-        'titre'         => $tache['titre'],
-        'date_debut'    => $request->date_debut,
-        'date_fin'      => $request->date_fin,
-        'progression'   => $tache['progression'],
-        'statut'        => $tache['statut'],
-        'ordre'         => $tache['ordre'],
+  public function storeConvention(Request $request)
+{
+    $request->validate([
+        'type'                   => 'required|in:stage_classique,pfe',
+        'intitule_stage'         => 'required|string|max:255',
+        'date_debut'             => 'required|date',
+        'date_fin'               => 'required|date|after:date_debut',
+        'service'                => 'nullable|string|max:255',
+        'maitre_stage'           => 'nullable|string|max:255',
+        // Infos entreprise
+        'entreprise_nom'         => 'required|string|max:255',
+        'entreprise_adresse'     => 'required|string|max:255',
+        'entreprise_telephone'   => 'nullable|string|max:50',
+        'entreprise_fax'         => 'nullable|string|max:50',
+        'entreprise_email'       => 'required|email|max:255',
+        'entreprise_representant'=> 'nullable|string|max:255',
+        'entreprise_secteur'     => 'nullable|string|max:255',
     ]);
-}
-        ActivityLog::log('user', auth()->id(), 'creation_convention');
 
-        return redirect()->route('etudiant.convention')
-                         ->with('success', 'Convention créée avec succès. En attente de signature du Doyen.');
+    // Vérifier si une entreprise avec cet email existe déjà
+    $entreprise = \App\Models\Entreprise::where('email_contact',
+                                                $request->entreprise_email)
+                                        ->first();
+
+    $convention = Convention::create([
+        'etudiant_id'             => auth()->id(),
+        'entreprise_id'           => $entreprise?->id,
+        'type'                    => $request->type,
+        'intitule_stage'          => $request->intitule_stage,
+        'date_debut'              => $request->date_debut,
+        'date_fin'                => $request->date_fin,
+        'service'                 => $request->service,
+        'maitre_stage'            => $request->maitre_stage,
+        // Infos entreprise
+        'entreprise_nom'          => $request->entreprise_nom,
+        'entreprise_adresse'      => $request->entreprise_adresse,
+        'entreprise_telephone'    => $request->entreprise_telephone,
+        'entreprise_fax'          => $request->entreprise_fax,
+        'entreprise_email'        => $request->entreprise_email,
+        'entreprise_representant' => $request->entreprise_representant,
+        'entreprise_secteur'      => $request->entreprise_secteur,
+        'etat'                    => 'non_signee',
+        'etape_signature'         => 0,
+        'date_creation'           => now(),
+    ]);
+
+    // Créer les tâches Gantt
+    $tachesDefaut = [
+        ['titre' => 'Intégration & découverte de l\'entreprise', 'ordre' => 1],
+        ['titre' => 'Visite et étude des postes sources', 'ordre' => 2],
+        ['titre' => 'Dimensionnement', 'ordre' => 3],
+        ['titre' => 'Étude BT', 'ordre' => 4],
+        ['titre' => 'Suivi & rédaction du rapport', 'ordre' => 5],
+        ['titre' => 'Préparation soutenance', 'ordre' => 6],
+    ];
+
+    foreach ($tachesDefaut as $tache) {
+        GanttTask::create([
+            'convention_id' => $convention->id,
+            'etudiant_id'   => auth()->id(),
+            'titre'         => $tache['titre'],
+            'date_debut'    => $request->date_debut,
+            'date_fin'      => $request->date_fin,
+            'progression'   => 0,
+            'statut'        => 'non_commence',
+            'ordre'         => $tache['ordre'],
+        ]);
     }
+
+    ActivityLog::log('user', auth()->id(), 'creation_convention');
+
+    return redirect()->route('etudiant.convention')
+                     ->with('success', 'Convention créée. En attente de traitement par l\'administration.');
+}
 
     public function signerConvention($id)
     {

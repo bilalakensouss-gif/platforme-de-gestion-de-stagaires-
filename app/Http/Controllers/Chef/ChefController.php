@@ -81,6 +81,21 @@ class ChefController extends Controller
                                  ->orderBy('created_at', 'desc')
                                  ->get();
 
+        // ✅ ADD FALLBACK FOR EACH CONVENTION
+        foreach ($conventions as $conv) {
+            if (!$conv->entreprise && $conv->entreprise_nom) {
+                $conv->setRelation('entreprise', (object)[
+                    'raison_sociale' => $conv->entreprise_nom,
+                    'adresse'       => $conv->entreprise_adresse,
+                    'telephone'     => $conv->entreprise_telephone,
+                    'fax'           => $conv->entreprise_fax,
+                    'email_contact' => $conv->entreprise_email,
+                    'representant'  => $conv->entreprise_representant,
+                    'secteur'       => $conv->entreprise_secteur,
+                ]);
+            }
+        }
+
         $encadrants = User::where('role', 'encadrant')->get();
 
         return view('chef.conventions', compact('conventions', 'encadrants'));
@@ -127,20 +142,21 @@ class ChefController extends Controller
 
         return back()->with('success', 'Encadrant affecté avec succès.');
     }
+
     public function destroyDemande($id)
-{
-    $demande = DemandeStage::where('chef_filiere_id', auth()->id())
+    {
+        $demande = DemandeStage::where('chef_filiere_id', auth()->id())
                            ->findOrFail($id);
 
-    // Supprimer le fichier PDF du storage
-    if (Storage::disk('public')->exists($demande->fichier_pdf)) {
-        Storage::disk('public')->delete($demande->fichier_pdf);
+        // Supprimer le fichier PDF du storage
+        if (Storage::disk('public')->exists($demande->fichier_pdf)) {
+            Storage::disk('public')->delete($demande->fichier_pdf);
+        }
+
+        $demande->delete();
+
+        ActivityLog::log('user', auth()->id(), 'suppression_demande_stage', 'demande', $id);
+
+        return back()->with('success', 'Demande supprimée avec succès.');
     }
-
-    $demande->delete();
-
-    ActivityLog::log('user', auth()->id(), 'suppression_demande_stage', 'demande', $id);
-
-    return back()->with('success', 'Demande supprimée avec succès.');
-}
 }

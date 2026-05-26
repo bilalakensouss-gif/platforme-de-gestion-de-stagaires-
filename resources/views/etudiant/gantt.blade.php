@@ -14,7 +14,8 @@
                     <p style="color:#888; font-size:12px; margin-bottom:4px;">Mon encadrant</p>
                     @if($convention->encadrant)
                         <p style="font-size:18px; font-weight:700; color:#1a3a6b; margin:0;">
-                            {{ $convention->encadrant->prenom }} {{ $convention->encadrant->nom }}
+                            {{ $convention->encadrant->prenom }}
+                            {{ $convention->encadrant->nom }}
                         </p>
                         <p style="color:#888; font-size:12px; margin:2px 0 0;">
                             {{ $convention->encadrant->specialite }}
@@ -49,7 +50,8 @@
     @php $progressionGlobale = round($tasks->avg('progression')); @endphp
     <div class="card">
         <div class="card-body">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between;
+                        align-items:center; margin-bottom:10px;">
                 <span style="font-weight:600;">Progression globale</span>
                 <span style="font-size:24px; font-weight:700; color:#1a3a6b;">
                     {{ $progressionGlobale }}%
@@ -58,55 +60,110 @@
             <div class="progress-bar-container" style="height:14px;">
                 <div class="progress-bar-fill"
                      style="width:{{ $progressionGlobale }}%;
-                            background:{{ $progressionGlobale == 100 ? '#27ae60' : '#1a3a6b' }};">
+                            background:{{ $progressionGlobale == 100
+                                ? '#27ae60' : '#1a3a6b' }};">
                 </div>
             </div>
         </div>
     </div>
     @endif
 
-    {{-- Diagramme de Gantt --}}
+    {{-- Tâches Gantt — MODIFIABLE par l'étudiant --}}
     <div class="card">
         <div class="card-header">
-            <h3>📊 Diagramme de Gantt</h3>
+            <h3>📊 Mon Diagramme de Gantt</h3>
+            <span style="font-size:12px; color:#27ae60; font-weight:600;">
+                ✏️ Vous pouvez modifier votre progression
+            </span>
         </div>
         <div class="card-body">
+
             @forelse($tasks as $task)
-            <div style="margin-bottom:20px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <div style="margin-bottom:20px; padding:16px;
+                        border:1px solid #dee2e6; border-radius:8px;">
+
+                <div style="display:flex; justify-content:space-between;
+                            align-items:center; margin-bottom:8px;">
                     <div>
-                        <span style="font-weight:600; font-size:14px;">{{ $task->titre }}</span>
-                        <span style="color:#888; font-size:11px; margin-left:8px;">
+                        <p style="font-weight:600; margin:0; font-size:14px;">
+                            {{ $task->titre }}
+                        </p>
+                        <p style="color:#888; font-size:11px; margin:2px 0 0;">
                             {{ $task->date_debut->format('d/m/Y') }} →
                             {{ $task->date_fin->format('d/m/Y') }}
-                        </span>
+                        </p>
                     </div>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        @if($task->statut === 'termine')
-                            <span class="badge badge-success">✓ Terminé</span>
-                        @elseif($task->statut === 'en_cours')
-                            <span class="badge badge-warning">En cours</span>
-                        @else
-                            <span class="badge badge-gray">Non commencé</span>
-                        @endif
-                        <span style="font-weight:700; color:#1a3a6b;">{{ $task->progression }}%</span>
-                    </div>
+                    @if($task->statut === 'termine')
+                        <span class="badge badge-success">✓ Terminé</span>
+                    @elseif($task->statut === 'en_cours')
+                        <span class="badge badge-warning">En cours</span>
+                    @else
+                        <span class="badge badge-gray">Non commencé</span>
+                    @endif
                 </div>
-                <div class="progress-bar-container" style="height:20px;">
+
+                {{-- Barre de progression --}}
+                <div class="progress-bar-container" style="height:20px; margin-bottom:12px;">
                     <div class="progress-bar-fill"
                          style="width:{{ max($task->progression, 2) }}%;
-                                background:{{ $task->progression == 100 ? '#27ae60' : ($task->progression > 0 ? '#2a5298' : '#dee2e6') }};
-                                display:flex; align-items:center; justify-content:center;
-                                color:white; font-size:11px; font-weight:600;">
+                                background:{{ $task->progression == 100
+                                    ? '#27ae60'
+                                    : ($task->progression > 0 ? '#2a5298' : '#dee2e6') }};
+                                display:flex; align-items:center;
+                                justify-content:center; color:white;
+                                font-size:11px; font-weight:600;">
                         @if($task->progression > 8) {{ $task->progression }}% @endif
                     </div>
                 </div>
+
+                {{-- Formulaire mise à jour — ETUDIANT SEULEMENT --}}
+                <form method="POST"
+                      action="{{ route('etudiant.gantt.update', $task->id) }}"
+                      style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                    @csrf
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <label style="font-size:12px; color:#666; font-weight:600;">
+                            Progression :
+                        </label>
+                        <input type="number" name="progression"
+                               value="{{ $task->progression }}"
+                               min="0" max="100"
+                               class="form-control"
+                               style="width:70px; padding:5px 8px; font-size:13px;">
+                        <span style="font-size:12px; color:#666;">%</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <label style="font-size:12px; color:#666; font-weight:600;">
+                            Statut :
+                        </label>
+                        <select name="statut" class="form-control"
+                                style="padding:5px 8px; font-size:13px;">
+                            <option value="non_commence"
+                                {{ $task->statut === 'non_commence' ? 'selected' : '' }}>
+                                Non commencé
+                            </option>
+                            <option value="en_cours"
+                                {{ $task->statut === 'en_cours' ? 'selected' : '' }}>
+                                En cours
+                            </option>
+                            <option value="termine"
+                                {{ $task->statut === 'termine' ? 'selected' : '' }}>
+                                Terminé
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        💾 Mettre à jour
+                    </button>
+                </form>
+
             </div>
             @empty
             <p style="text-align:center; color:#999; padding:20px;">
                 Aucune tâche définie pour le moment.
             </p>
             @endforelse
+
         </div>
     </div>
 
@@ -133,10 +190,12 @@
                         <td>{{ $task->date_fin->format('d/m/Y') }}</td>
                         <td>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <div class="progress-bar-container" style="width:80px; height:8px;">
+                                <div class="progress-bar-container"
+                                     style="width:80px; height:8px;">
                                     <div class="progress-bar-fill"
                                          style="width:{{ $task->progression }}%;
-                                                background:{{ $task->progression == 100 ? '#27ae60' : '#2a5298' }};">
+                                                background:{{ $task->progression == 100
+                                                    ? '#27ae60' : '#2a5298' }};">
                                     </div>
                                 </div>
                                 <span style="font-size:12px;">{{ $task->progression }}%</span>
