@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
+
             --navy:   #0f1f3d;
             --navy2:  #1a3460;
             --red:    #c0392b;
@@ -25,6 +26,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
+            
             font-family: 'DM Sans', sans-serif;
             background: var(--white);
             color: var(--text);

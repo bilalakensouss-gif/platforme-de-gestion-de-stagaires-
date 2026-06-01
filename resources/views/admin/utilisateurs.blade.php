@@ -6,12 +6,15 @@
 
     @if(session('success'))
         <div class="alert alert-success">✅ {{ session('success') }}</div>
+
     @endif
 
     {{-- Doyens --}}
+
     <div class="card">
         <div class="card-header">
             <h3>Doyens</h3>
+            
             <a href="{{ route('admin.doyens.create') }}" class="btn btn-primary btn-sm">
                 + Ajouter
             </a>

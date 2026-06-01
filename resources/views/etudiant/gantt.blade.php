@@ -9,35 +9,45 @@
     {{-- Infos encadrant --}}
     <div class="card">
         <div class="card-body">
+
             <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+
                 <div>
                     <p style="color:#888; font-size:12px; margin-bottom:4px;">Mon encadrant</p>
                     @if($convention->encadrant)
                         <p style="font-size:18px; font-weight:700; color:#1a3a6b; margin:0;">
+
                             {{ $convention->encadrant->prenom }}
                             {{ $convention->encadrant->nom }}
                         </p>
                         <p style="color:#888; font-size:12px; margin:2px 0 0;">
+
                             {{ $convention->encadrant->specialite }}
                         </p>
                     @else
+
                         <p style="color:#999; font-style:italic;">Pas encore affecté</p>
                     @endif
                 </div>
                 <div>
+
                     <p style="color:#888; font-size:12px; margin-bottom:4px;">Stage</p>
                     <p style="font-weight:600; margin:0;">{{ $convention->intitule_stage }}</p>
+
                     <p style="color:#888; font-size:12px; margin:2px 0 0;">
                         {{ $convention->entreprise->raison_sociale }}
                     </p>
+
                 </div>
                 <div>
                     <p style="color:#888; font-size:12px; margin-bottom:4px;">Période</p>
                     <p style="font-weight:600; margin:0;">
                         {{ $convention->date_debut->format('d/m/Y') }} →
+
                         {{ $convention->date_fin->format('d/m/Y') }}
                     </p>
                     <p style="color:#888; font-size:12px; margin:2px 0 0;">
+                        
                         {{ $convention->date_debut->diffInDays($convention->date_fin) }} jours
                     </p>
                 </div>

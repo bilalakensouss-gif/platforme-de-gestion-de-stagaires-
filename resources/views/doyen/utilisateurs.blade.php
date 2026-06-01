@@ -7,8 +7,10 @@
     {{-- Encadrants --}}
     <div class="card">
         <div class="card-header">
+
             <h3>Encadrants</h3>
             <a href="{{ route('doyen.encadrants.create') }}" class="btn btn-primary btn-sm">
+                
                 + Ajouter
             </a>
         </div>

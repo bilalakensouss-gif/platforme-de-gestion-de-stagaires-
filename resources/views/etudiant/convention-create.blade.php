@@ -6,6 +6,7 @@
 
 <div class="card" style="max-width:800px;">
     <div class="card-header">
+        
         <h3>Nouvelle convention de stage</h3>
         <a href="{{ route('etudiant.convention') }}" class="btn btn-secondary btn-sm">
             ← Retour

@@ -6,7 +6,9 @@
 
 <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px;">
     <div class="stat-box">
+
         <div class="stat-box-icon" style="background:#e8f0fe;">🎓</div>
+        
         <div>
             <div class="stat-box-number">{{ $stats['etudiants'] }}</div>
             <div class="stat-box-label">Étudiants de ma filière</div>

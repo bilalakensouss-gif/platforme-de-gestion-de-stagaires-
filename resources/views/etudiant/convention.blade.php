@@ -8,9 +8,12 @@
 
     {{-- Infos convention --}}
     <div class="card">
+
         <div class="card-header">
+            
             <h3>Détails de la convention</h3>
             <a href="{{ route('etudiant.convention.pdf', $convention->id) }}"
+
                class="btn btn-secondary btn-sm">
                 📄 Télécharger PDF
             </a>
@@ -22,6 +25,7 @@
                     <p style="font-weight:600;">
                         {{ $convention->type === 'stage_classique'
                             ? 'Stage classique (TYPE 1)'
+
                             : 'PFE (TYPE 2)' }}
                     </p>
                 </div>
@@ -32,6 +36,7 @@
                         {{-- On utilise les champs directs, plus fiable que la relation --}}
                         {{ $convention->entreprise_nom
                             ?? $convention->entreprise->raison_sociale
+                            
                             ?? 'Non renseignée' }}
                     </p>
                 </div>

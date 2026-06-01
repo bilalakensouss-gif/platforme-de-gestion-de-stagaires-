@@ -12,10 +12,12 @@
         <form method="POST" action="{{ route('chef.demandes.store') }}"
               enctype="multipart/form-data">
             @csrf
+
             <div class="form-group">
                 <label class="form-label">Fichier PDF de la demande</label>
                 <input type="file" name="fichier_pdf" accept=".pdf" class="form-control" required>
                 @error('fichier_pdf')
+                
                     <p style="color:red; font-size:12px; margin-top:4px;">{{ $message }}</p>
                 @enderror
             </div>

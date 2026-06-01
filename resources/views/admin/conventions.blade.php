@@ -5,22 +5,29 @@
 @section('content')
 
     @if(session('success'))
+
         <div class="alert alert-success">✅ {{ session('success') }}</div>
+
     @endif
     @if(session('error'))
         <div class="alert alert-danger">❌ {{ session('error') }}</div>
+
     @endif
 
 <div class="card">
     <div class="card-header">
+
         <h3>Conventions déposées par les étudiants</h3>
+
     </div>
     <div class="card-body" style="padding:0;">
         <table class="fst-table">
+
             <thead>
 \\c                <tr>
                     <th>Étudiant</th>
                     <th>Entreprise</th>
+                    
                     <th>Contact entreprise</th>
                     <th>Type</th>
                     <th>État</th>

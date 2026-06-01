@@ -7,6 +7,7 @@
 {{-- Infos étudiant --}}
 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:24px;">
     <div class="card" style="margin-bottom:0;">
+        
         <div class="card-body" style="padding:18px;">
             <p style="color:#888; font-size:11px; text-transform:uppercase;
                        letter-spacing:1px; margin-bottom:8px;">Étudiant</p>

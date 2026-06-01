@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Mot de passe oublié — FST Marrakech</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -18,9 +20,12 @@
             --muted: #6b7a99;
         }  \\c
         * { margin:0; padding:0; box-sizing:border-box; }
+
         body {
             font-family: 'DM Sans', sans-serif;
+
             background: var(--light);
+            
             min-height: 100vh;
             display: flex; flex-direction: column;
         }

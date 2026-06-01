@@ -12,6 +12,7 @@
         <table class="fst-table">
             <thead>
                 <tr>
+
                     <th>Étudiant</th>
                     <th>Filière</th>
                     <th>Entreprise</th>
@@ -24,6 +25,7 @@
             <tbody>
                 @forelse($conventions as $conv)
                 <tr>
+
                     <td>
                         {{ $conv->etudiant->prenom }} {{ $conv->etudiant->nom }}<br>
                         <span style="color:#888; font-size:11px;">{{ $conv->etudiant->email }}</span>
@@ -33,6 +35,7 @@
                     <td style="font-size:12px;">
                         {{ $conv->date_debut->format('d/m/Y') }}<br>
                         {{ $conv->date_fin->format('d/m/Y') }}
+
                     </td>
                     <td>
                         @if($conv->etat === 'signee')
@@ -41,6 +44,7 @@
                             <span class="badge badge-warning">En cours</span>
                         @else
                             <span class="badge badge-danger">Non signée</span>
+
                         @endif
                     </td>
                     <td>
@@ -51,6 +55,7 @@
                             </a>
                         @else
                             <span style="color:#999; font-size:12px;">Non déposé</span>
+
                         @endif
                     </td>
                     <td>
@@ -59,6 +64,7 @@
                             Voir détails
                         </a>
                     </td>
+                    
                 </tr>
                 @empty
                 <tr>

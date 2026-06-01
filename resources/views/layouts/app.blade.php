@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Gestion des Stagiaires') — FST Marrakech</title>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <style>
         :root {
             --fst-blue:     #1a3a6b;
             --fst-blue-light: #2a5298;
             --fst-red:      #c0392b;
+
             --fst-red-light: #e74c3c;
             --fst-gray:     #f4f6f9;
             --fst-border:   #dee2e6;
@@ -17,6 +20,7 @@
 \\c
         body {
             background-color: var(--fst-gray);
+
             font-family: 'Segoe UI', sans-serif;
         }
 
@@ -24,7 +28,9 @@
         .sidebar {
             width: 260px;
             min-height: 100vh;
+
             background: linear-gradient(180deg, var(--fst-blue) 0%, var(--fst-blue-light) 100%);
+            
             position: fixed;
             top: 0;
             left: 0;

@@ -10,15 +10,20 @@
     <div class="card-header">
         <div>
             <h3 style="color:#1a3a6b;">
+
                 {{ $conv->etudiant->prenom }} {{ $conv->etudiant->nom }}
+
             </h3>
             <p style="color:#888; font-size:12px; margin:2px 0 0;">
                 {{ $conv->entreprise->raison_sociale }} —
                 {{ $conv->date_debut->format('d/m/Y') }} au
+
                 {{ $conv->date_fin->format('d/m/Y') }}
             </p>
         </div>
         <a href="{{ route('encadrant.etudiant.show', $conv->id) }}"
+
+            
            class="btn btn-primary btn-sm">
             VOIR DÉTAILS
         </a>

@@ -5,8 +5,11 @@
 @section('content')
 
 <div class="card" style="max-width:700px;">
+
     <div class="card-header">
+
         <h3>Nouvelle entreprise</h3>
+        
         <a href="{{ route('doyen.utilisateurs') }}" class="btn btn-secondary btn-sm">
             ← Retour
         </a>
