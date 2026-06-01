@@ -10,7 +10,7 @@
     </div>
     <div class="card-body" style="padding:0;">
         <table class="fst-table">
-            <thead>
+            <thead>   \\c
                 <tr>
                     <th>Étudiant</th>
                     <th>Entreprise</th>

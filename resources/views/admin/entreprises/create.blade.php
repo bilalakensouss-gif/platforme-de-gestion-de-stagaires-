@@ -21,7 +21,7 @@
 
         <form method="POST" action="{{ route('admin.entreprises.store') }}">
             @csrf
-
+\\c
             <div class="form-group">
                 <label class="form-label">Raison sociale</label>
                 <input type="text" name="raison_sociale" class="form-control"

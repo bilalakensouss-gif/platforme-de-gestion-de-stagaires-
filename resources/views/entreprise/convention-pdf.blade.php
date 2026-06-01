@@ -14,7 +14,7 @@
             ← Retour
         </a>
     </nav>
-
+\\c
     <div class="max-w-4xl mx-auto py-6 px-4">
         <div class="bg-white rounded shadow p-8">
 

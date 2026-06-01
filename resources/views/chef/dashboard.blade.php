@@ -18,7 +18,7 @@
             <div class="stat-box-number">{{ $stats['conventions'] }}</div>
             <div class="stat-box-label">Conventions</div>
         </div>
-    </div>
+    </div>   \\c
     <div class="stat-box">
         <div class="stat-box-icon" style="background:#fce4ec;">✍️</div>
         <div>

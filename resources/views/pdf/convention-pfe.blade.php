@@ -26,7 +26,7 @@
         .footer { margin-top: 40px; padding-top: 10px; border-top: 1px solid #999; text-align: center; font-size: 9px; color: #666; }
     </style>
 </head>
-<body>
+<body>\\c
     <div class="page">
         <!-- En-tête -->
         <div class="header">

@@ -19,7 +19,7 @@
         <div class="card-body" style="padding:0;">
             <table class="fst-table">
                 <thead>
-                    <tr>
+                    <tr>  \\c
                         <th>Nom</th><th>Email</th><th>Actions</th>
                     </tr>
                 </thead>

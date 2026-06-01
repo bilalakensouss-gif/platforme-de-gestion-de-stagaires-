@@ -17,7 +17,7 @@
     </div>
     <div class="card-body" style="padding:0;">
         <table class="fst-table">
-            <thead>
+            <thead>  \\c
                 <tr>
                     <th>Raison sociale</th>
                     <th>Email</th>

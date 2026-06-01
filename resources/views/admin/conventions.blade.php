@@ -18,7 +18,7 @@
     <div class="card-body" style="padding:0;">
         <table class="fst-table">
             <thead>
-                <tr>
+\\c                <tr>
                     <th>Étudiant</th>
                     <th>Entreprise</th>
                     <th>Contact entreprise</th>

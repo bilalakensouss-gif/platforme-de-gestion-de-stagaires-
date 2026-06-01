@@ -11,7 +11,7 @@
             <div class="stat-box-number">{{ $stats['etudiants'] }}</div>
             <div class="stat-box-label">Étudiants encadrés</div>
         </div>
-    </div>
+    </div>  \\c
     <div class="stat-box">
         <div class="stat-box-icon" style="background:#fff3e0;">⏳</div>
         <div>

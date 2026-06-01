@@ -14,7 +14,7 @@
             --fst-gray:     #f4f6f9;
             --fst-border:   #dee2e6;
         }
-
+\\c
         body {
             background-color: var(--fst-gray);
             font-family: 'Segoe UI', sans-serif;

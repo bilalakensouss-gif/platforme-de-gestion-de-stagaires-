@@ -19,7 +19,7 @@
                     <th>Encadrant</th>
                     <th>Signature Chef</th>
                     <th>Actions</th>
-                </tr>
+                </tr>  \\c
             </thead>
             <tbody>
                 @forelse($conventions as $conv)

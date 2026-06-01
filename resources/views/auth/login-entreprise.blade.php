@@ -17,7 +17,7 @@
             --light: #f7f8fc;
             --border: #e4e8f0;
             --muted: #6b7a99;
-        }
+        }   \\c
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: 'DM Sans', sans-serif;

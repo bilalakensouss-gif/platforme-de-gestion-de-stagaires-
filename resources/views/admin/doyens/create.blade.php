@@ -18,7 +18,7 @@
                 @foreach($errors->all() as $error)<p>⚠️ {{ $error }}</p>@endforeach
             </div>
         @endif
-
+\\c
         <form method="POST" action="{{ route('admin.doyens.store') }}">
             @csrf
 
