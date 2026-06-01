@@ -25,6 +25,7 @@ return new class extends Migration
     {
         Schema::table('entreprises', function (Blueprint $table) {
             $table->dropColumn(['telephone', 'fax', 'representant']);
+            
         });
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('code_masar');

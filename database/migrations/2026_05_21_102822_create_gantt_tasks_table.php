@@ -19,6 +19,7 @@ return new class extends Migration
                   ->constrained('users')
                   ->onDelete('cascade');
 
+                  
             $table->string('titre');
             $table->date('date_debut');
             $table->date('date_fin');
