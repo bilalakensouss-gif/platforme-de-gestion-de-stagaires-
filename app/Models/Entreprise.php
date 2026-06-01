@@ -10,6 +10,7 @@ class Entreprise extends Authenticatable
 {
     use Notifiable;
 
+    
     protected $fillable = [
     'raison_sociale',
     'adresse',
