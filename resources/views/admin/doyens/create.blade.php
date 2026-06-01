@@ -8,6 +8,7 @@
     <div class="card-header">
         <h3>Nouveau Doyen</h3>
         <a href="{{ route('admin.utilisateurs') }}" class="btn btn-secondary btn-sm">
+
             ← Retour
         </a>
     </div>
@@ -15,22 +16,31 @@
 
         @if($errors->any())
             <div class="alert alert-danger">
+
                 @foreach($errors->all() as $error)<p>⚠️ {{ $error }}</p>@endforeach
+
             </div>
         @endif
-
+\\c
         <form method="POST" action="{{ route('admin.doyens.store') }}">
+
             @csrf
 
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
                 <div class="form-group">
+
                     <label class="form-label">Nom</label>
+
                     <input type="text" name="nom" class="form-control"
+
                            value="{{ old('nom') }}" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Prénom</label>
+
                     <input type="text" name="prenom" class="form-control"
+                    
                            value="{{ old('prenom') }}" required>
                 </div>
             </div>

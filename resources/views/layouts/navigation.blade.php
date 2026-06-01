@@ -11,16 +11,20 @@
 
                 <!-- Navigation Links selon rôle -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    
                     @auth
                         @if(auth()->user()->role === 'doyen')
                             <x-nav-link :href="route('doyen.dashboard')" :active="request()->routeIs('doyen.dashboard')">
                                 Tableau de bord
+
                             </x-nav-link>
                             <x-nav-link :href="route('doyen.utilisateurs')" :active="request()->routeIs('doyen.utilisateurs')">
                                 Utilisateurs
+
                             </x-nav-link>
                             <x-nav-link :href="route('doyen.conventions')" :active="request()->routeIs('doyen.conventions')">
                                 Conventions
+                                
                             </x-nav-link>
 
                         @elseif(auth()->user()->role === 'chef_filiere')

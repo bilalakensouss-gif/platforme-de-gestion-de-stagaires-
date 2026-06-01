@@ -9,23 +9,28 @@
             color: #333;
             margin: 0;
             padding: 20px;
+
         }
+
         .header {
             text-align: center;
             margin-bottom: 30px;
             border-bottom: 2px solid #333;
             padding-bottom: 15px;
         }
+
         .header h1 {
             font-size: 20px;
             margin: 0;
             text-transform: uppercase;
         }
+
         .header p {
             margin: 5px 0 0;
             color: #666;
         }
         .logos {
+            
             display: table;
             width: 100%;
             margin-bottom: 10px;

@@ -8,15 +8,19 @@
     <div class="card-header">
         <h3>Mon rapport de stage</h3>
     </div>
+
     <div class="card-body">
+
 
         @if($rapport)
             <div style="text-align:center; padding:20px;">
+
                 <p style="font-size:16px; margin-bottom:8px;">✅ Rapport déposé</p>
                 <p style="color:#888; margin-bottom:16px;">
                     Déposé le {{ $rapport->date_depot->format('d/m/Y') }}
                 </p>
                 <a href="{{ Storage::url($rapport->fichier) }}"
+
                    target="_blank" class="btn btn-primary">
                     📄 Télécharger mon rapport
                 </a>
@@ -24,9 +28,11 @@
         @else
             @if($convention)
                 <form method="POST" action="{{ route('etudiant.rapport.store') }}"
+
                       enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="convention_id" value="{{ $convention->id }}">
+                    
 
                     <div class="form-group">
                         <label class="form-label">Rapport de stage (PDF)</label>

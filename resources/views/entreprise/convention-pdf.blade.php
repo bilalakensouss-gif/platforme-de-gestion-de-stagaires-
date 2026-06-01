@@ -7,14 +7,17 @@
 </head>
 <body class="bg-gray-100">
 
+
     <nav class="bg-white border-b px-6 py-4 flex justify-between items-center">
+
         <span class="font-bold text-lg">🏢 Espace Entreprise</span>
         <a href="{{ route('entreprise.convention') }}"
+        
            class="text-sm text-blue-600 hover:underline">
             ← Retour
         </a>
     </nav>
-
+\\c
     <div class="max-w-4xl mx-auto py-6 px-4">
         <div class="bg-white rounded shadow p-8">
 

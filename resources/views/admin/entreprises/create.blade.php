@@ -5,8 +5,11 @@
 @section('content')
 
 <div class="card" style="max-width:700px;">
+
     <div class="card-header">
+
         <h3>Nouvelle entreprise</h3>
+
         <a href="{{ route('admin.entreprises') }}" class="btn btn-secondary btn-sm">
             ← Retour
         </a>
@@ -14,14 +17,16 @@
     <div class="card-body">
 
         @if($errors->any())
+
             <div class="alert alert-danger">
+                
                 @foreach($errors->all() as $error)<p>⚠️ {{ $error }}</p>@endforeach
             </div>
         @endif
 
         <form method="POST" action="{{ route('admin.entreprises.store') }}">
             @csrf
-
+\\c
             <div class="form-group">
                 <label class="form-label">Raison sociale</label>
                 <input type="text" name="raison_sociale" class="form-control"

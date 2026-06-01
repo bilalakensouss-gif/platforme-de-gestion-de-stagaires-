@@ -6,13 +6,15 @@
 
 <div class="card" style="max-width:700px;">
     <div class="card-header">
+
         <h3>Nouvel encadrant</h3>
+        
         <a href="{{ route('doyen.utilisateurs') }}" class="btn btn-secondary btn-sm">
             ← Retour
         </a>
     </div>
     <div class="card-body">
-
+\\c
         @if($errors->any())
             <div class="alert alert-danger">
                 @foreach($errors->all() as $error)

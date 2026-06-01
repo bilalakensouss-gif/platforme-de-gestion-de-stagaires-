@@ -6,11 +6,15 @@
 
 <div class="card">
     <div class="card-header">
+
         <h3>Conventions — Signature Doyen (Étape 1)</h3>
+
     </div>
     <div class="card-body" style="padding:0;">
+
         <table class="fst-table">
-            <thead>
+            <thead>   \\c
+                
                 <tr>
                     <th>Étudiant</th>
                     <th>Entreprise</th>

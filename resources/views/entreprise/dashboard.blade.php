@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espace Entreprise — FST Marrakech</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <style>
         :root {
             --fst-blue: #1a3a6b;
             --fst-blue-light: #2a5298;
             --fst-red: #c0392b;
+
             --fst-green: #27ae60;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Segoe UI', sans-serif; background:#f4f6f9; }
 
+
         .sidebar {
             width: 240px;
             min-height: 100vh;
             background: linear-gradient(180deg, #27ae60 0%, #1e8449 100%);
+
             position: fixed;
             top: 0; left: 0;
             box-shadow: 4px 0 15px rgba(0,0,0,0.15);
@@ -26,37 +30,45 @@
         .sidebar-brand {
             padding: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.15);
+
         }
         .sidebar-brand .logo {
             width: 40px; height: 40px;
             background: rgba(255,255,255,0.2);
             border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
+
             color: white; font-weight: bold; font-size: 16px;
             margin-bottom: 8px;
         }
         .sidebar-brand h1 { color: white; font-size: 14px; font-weight: 700; }
+
         .sidebar-brand p { color: rgba(255,255,255,0.6); font-size: 11px; }
 
         .sidebar-user {
             padding: 15px 20px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+
             background: rgba(0,0,0,0.1);
         }
         .sidebar-user .name { color: white; font-size: 13px; font-weight: 600; }
         .sidebar-user .role { color: rgba(255,255,255,0.6); font-size: 11px; }
+
 
         .sidebar-menu { padding: 15px 0; }
         .sidebar-menu a {
             display: flex; align-items: center; gap: 10px;
             padding: 11px 20px;
             color: rgba(255,255,255,0.75);
+
             text-decoration: none; font-size: 13.5px;
             border-left: 3px solid transparent;
             transition: all 0.2s;
         }
         .sidebar-menu a:hover, .sidebar-menu a.active {
             color: white;
+
+            
             background: rgba(255,255,255,0.15);
             border-left-color: white;
         }

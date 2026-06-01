@@ -6,12 +6,15 @@
 
     @if(session('success'))
         <div class="alert alert-success">✅ {{ session('success') }}</div>
+
     @endif
 
     {{-- Doyens --}}
+
     <div class="card">
         <div class="card-header">
             <h3>Doyens</h3>
+            
             <a href="{{ route('admin.doyens.create') }}" class="btn btn-primary btn-sm">
                 + Ajouter
             </a>
@@ -19,7 +22,7 @@
         <div class="card-body" style="padding:0;">
             <table class="fst-table">
                 <thead>
-                    <tr>
+                    <tr>  \\c
                         <th>Nom</th><th>Email</th><th>Actions</th>
                     </tr>
                 </thead>

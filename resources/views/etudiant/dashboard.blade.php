@@ -7,11 +7,14 @@
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;">
 
     {{-- Profil --}}
+    
     <div class="card">
         <div class="card-header"><h3>Mon profil</h3></div>
         <div class="card-body">
+
             <p style="margin-bottom:8px;">
                 <span style="color:#888; font-size:12px;">Nom</span><br>
+
                 <strong>{{ auth()->user()->prenom }} {{ auth()->user()->nom }}</strong>
             </p>
             <p style="margin-bottom:8px;">
@@ -21,6 +24,7 @@
             <p>
                 <span style="color:#888; font-size:12px;">Email</span><br>
                 <strong>{{ auth()->user()->email }}</strong>
+
             </p>
         </div>
     </div>
@@ -28,24 +32,30 @@
     {{-- Convention --}}
     <div class="card">
         <div class="card-header"><h3>Ma convention</h3></div>
+
         <div class="card-body">
             @if($convention)
                 <p style="margin-bottom:8px;">
                     <span style="color:#888; font-size:12px;">Type</span><br>
+
                     <strong>{{ $convention->type === 'stage_classique' ? 'Stage classique' : 'PFE' }}</strong>
                 </p>
                 <p style="margin-bottom:8px;">
                     <span style="color:#888; font-size:12px;">Entreprise</span><br>
+
                     <strong>{{ $convention->entreprise->raison_sociale }}</strong>
                 </p>
                 <p style="margin-bottom:12px;">
                     <span style="color:#888; font-size:12px;">État</span><br>
+
                     @if($convention->etat === 'signee')
                         <span class="badge badge-success">Signée ✓</span>
                     @elseif($convention->etat === 'partiellement_signee')
+
                         <span class="badge badge-warning">En cours</span>
                     @else
                         <span class="badge badge-danger">Non signée</span>
+                        
                     @endif
                 </p>
                 <a href="{{ route('etudiant.convention') }}" class="btn btn-primary btn-sm">

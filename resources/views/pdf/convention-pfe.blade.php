@@ -26,11 +26,14 @@
         .footer { margin-top: 40px; padding-top: 10px; border-top: 1px solid #999; text-align: center; font-size: 9px; color: #666; }
     </style>
 </head>
-<body>
+
+<body>\\c
     <div class="page">
+
         <!-- En-tête -->
         <div class="header">
             <div class="faculty-name">Faculté des Sciences et Techniques</div>
+            
             <div class="university">Université Cadi Ayyad - Marrakech</div>
             <div style="font-size: 10px; color: #666; margin-top: 5px;">
                 BP 549, Av. Abdelkrim El Khattabi, Guéliz, Marrakech, Maroc<br>

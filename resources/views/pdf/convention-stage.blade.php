@@ -11,25 +11,30 @@
             padding: 20px 30px;
         }
         .header {
+
             text-align: center;
             margin-bottom: 20px;
             border-bottom: 2px solid #000;
             padding-bottom: 10px;
+
         }
         .faculty-name {
             font-size: 14px;
             font-weight: bold;
         }
+
         .university-name {
             font-size: 11px;
             color: #333;
         }
+
         .contact-info {
             font-size: 9px;
             color: #555;
             margin-top: 5px;
         }
         .title {
+            
             text-align: center;
             font-size: 20px;
             font-weight: bold;

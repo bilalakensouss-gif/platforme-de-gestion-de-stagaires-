@@ -25,33 +25,49 @@
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
                 <div class="form-group">
                     <label class="form-label">Nom</label>
+
                     <input type="text" name="nom" class="form-control"
+
                            value="{{ old('nom') }}" required>
+
                 </div>
                 <div class="form-group">
                     <label class="form-label">Prénom</label>
+
                     <input type="text" name="prenom" class="form-control"
+
                            value="{{ old('prenom') }}" required>
+
                 </div>
             </div>
 
             <div class="form-group">
+
                 <label class="form-label">Email</label>
+
                 <input type="email" name="email" class="form-control"
+
                        value="{{ old('email') }}" required>
             </div>
 
             <div class="form-group">
+
                 <label class="form-label">Filière</label>
+
                 <select name="filiere" class="form-control" required>
+
                     <option value="">-- Choisir --</option>
+
                     <option value="Génie Informatique">Génie Informatique</option>
+
                     <option value="Génie Électrique">Génie Électrique</option>
+
                     <option value="Génie Civil">Génie Civil</option>
+
                     <option value="Génie Mécanique">Génie Mécanique</option>
                 </select>
             </div>
-
+\\<!--  -->
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
                 <div class="form-group">
                     <label class="form-label">Mot de passe</label>
