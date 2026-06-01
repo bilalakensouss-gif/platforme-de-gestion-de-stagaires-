@@ -28,6 +28,7 @@ return new class extends Migration
             // Détails supplémentaires
             $table->text('details')->nullable();
 
+            
             $table->timestamps();
         });
     }

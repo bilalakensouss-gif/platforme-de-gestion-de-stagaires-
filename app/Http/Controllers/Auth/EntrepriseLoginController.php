@@ -30,6 +30,7 @@ class EntrepriseLoginController extends Controller
         if (Auth::guard('entreprise')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
             return redirect()->route('entreprise.dashboard');
+            
         }
 
         return back()->withErrors([

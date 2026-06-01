@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CheckEntreprise
 {
+    
     public function handle(Request $request, Closure $next)
     {
         if (!auth('entreprise')->check()) {

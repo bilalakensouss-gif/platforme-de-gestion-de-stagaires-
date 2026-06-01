@@ -58,6 +58,7 @@ return new class extends Migration
                     $table->dropColumn($col);
                 }
             }
+            
         });
 
         if (Schema::hasColumn('users', 'code_masar')) {

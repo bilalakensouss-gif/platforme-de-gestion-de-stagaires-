@@ -20,6 +20,7 @@ class GanttTask extends Model
         'ordre',
     ];
 
+    
     protected $casts = [
         'date_debut' => 'date',
         'date_fin'   => 'date',

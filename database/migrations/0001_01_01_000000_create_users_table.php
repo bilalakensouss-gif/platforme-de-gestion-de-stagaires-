@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable(); // requis par Breeze
             $table->string('password');
 
+            
             // Rôle
            $table->enum('role', [
     'admin',

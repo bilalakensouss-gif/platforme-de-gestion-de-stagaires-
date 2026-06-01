@@ -18,6 +18,7 @@ class Rapport extends Model
         'date_depot' => 'date',
     ];
 
+    
     public function convention()
     {
         return $this->belongsTo(Convention::class, 'convention_id');

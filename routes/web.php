@@ -134,6 +134,7 @@ Route::prefix('etudiant')->name('etudiant.')->middleware(['auth', 'role:etudiant
                 [EtudiantController::class, 'updateGantt'])
          ->name('gantt.update');
     Route::get('/rapport', [EtudiantController::class, 'rapport'])->name('rapport');
+    
     Route::post('/rapport', [EtudiantController::class, 'storeRapport'])->name('rapport.store');
 });
 

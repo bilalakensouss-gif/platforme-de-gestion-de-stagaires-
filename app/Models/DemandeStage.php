@@ -15,6 +15,7 @@ class DemandeStage extends Model
         'fichier_pdf',
         'date_depot',
     ];
+    
 
     protected $casts = [
         'date_depot' => 'date',

@@ -24,6 +24,7 @@ class ActivityLog extends Model
         string $cibleType = null,
         int $cibleId = null,
         string $details = null
+        
     ): void {
         self::create([
             'acteur_type' => $acteurType,

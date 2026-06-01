@@ -23,6 +23,7 @@ class Convention extends Model
     'entreprise_nom',
     'entreprise_adresse',
     'entreprise_telephone',
+    
     'entreprise_fax',
     'entreprise_email',
     'entreprise_representant',

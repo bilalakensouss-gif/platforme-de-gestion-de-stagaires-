@@ -85,6 +85,7 @@ class EntrepriseController extends Controller
         return back()->with('success', 'Convention signée avec succès ! La convention est maintenant complète.');
     }
 
+    
     // =====================
     // Télécharger PDF
     // =====================

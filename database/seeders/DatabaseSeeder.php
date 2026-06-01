@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'filiere'  => 'Génie Informatique',
         ]);
 
+        
         // Encadrant
         User::create([
             'nom'        => 'Idrissi',
