@@ -151,6 +151,7 @@ class ChefController extends Controller
         // Supprimer le fichier PDF du storage
         if (Storage::disk('public')->exists($demande->fichier_pdf)) {
             Storage::disk('public')->delete($demande->fichier_pdf);
+            
         }
 
         $demande->delete();

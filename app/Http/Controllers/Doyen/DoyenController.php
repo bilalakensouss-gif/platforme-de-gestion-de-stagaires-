@@ -59,6 +59,7 @@ class DoyenController extends Controller
             'date_signature_doyen' => now(),
             'etape_signature'      => 1,
             'etat'                 => 'partiellement_signee',
+            
         ]);
 
         ActivityLog::log('user', auth()->id(), 'signature_doyen',

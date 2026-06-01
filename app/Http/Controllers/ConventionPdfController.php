@@ -80,6 +80,7 @@ class ConventionPdfController extends Controller
     public function downloadEntreprise($id)
     {
         $entreprise = Auth::guard('entreprise')->user();
+        
 
         $convention = Convention::with(['etudiant', 'entreprise', 'encadrant'])
                                 ->where('entreprise_id', $entreprise->id)

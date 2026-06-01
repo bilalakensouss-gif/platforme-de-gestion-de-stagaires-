@@ -233,6 +233,7 @@ class AdminController extends Controller
             'email_contact'  => $request->email_contact,
             'password'       => Hash::make($request->password),
         ]);
+        
 
         // Lier la convention à l'entreprise
         $convention->update([

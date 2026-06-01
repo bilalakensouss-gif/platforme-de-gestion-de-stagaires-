@@ -86,6 +86,7 @@ class EncadrantController extends Controller
             'progression' => 'required|integer|min:0|max:100',
             'statut'      => 'required|in:non_commence,en_cours,termine',
         ]);
+        
 
         $task = GanttTask::findOrFail($id);
 
