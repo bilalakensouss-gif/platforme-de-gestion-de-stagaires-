@@ -24,7 +24,7 @@
             <button type="submit" class="btn btn-primary">
                 📤 Déposer la demande
             </button>
-        </form>  \\c
+        </form>  
     </div>
 </div>
 

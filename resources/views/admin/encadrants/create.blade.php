@@ -25,7 +25,7 @@
 
             </div>
         @endif
-\\c
+
         <form method="POST" action="{{ route('admin.encadrants.store') }}">
 
             @csrf

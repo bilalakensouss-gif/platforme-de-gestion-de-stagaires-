@@ -24,7 +24,7 @@
         <table class="fst-table">
 
             <thead>
-\\c                <tr>
+              <tr>
                     <th>Étudiant</th>
                     <th>Entreprise</th>
                     

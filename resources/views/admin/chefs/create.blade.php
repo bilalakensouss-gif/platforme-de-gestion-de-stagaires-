@@ -67,7 +67,7 @@
                     <option value="Génie Mécanique">Génie Mécanique</option>
                 </select>
             </div>
-\\<!--  -->
+
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
                 <div class="form-group">
                     <label class="form-label">Mot de passe</label>

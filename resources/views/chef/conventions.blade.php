@@ -21,7 +21,7 @@
                     <th>Encadrant</th>
                     <th>Signature Chef</th>
                     <th>Actions</th>
-                </tr>  \\c
+                </tr>  
             </thead>
             <tbody>
                 @forelse($conventions as $conv)

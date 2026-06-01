@@ -14,7 +14,7 @@
             <div class="stat-box-label">Étudiants</div>
         </div>
     </div>
-\\c
+
     <div class="stat-box">
         <div class="stat-box-icon" style="background:#e8f5e9;">👨‍🏫</div>
         <div>

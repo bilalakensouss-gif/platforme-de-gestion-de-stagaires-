@@ -13,7 +13,7 @@
     <div class="card-body" style="padding:0;">
 
         <table class="fst-table">
-            <thead>   \\c
+            <thead>   
                 
                 <tr>
                     <th>Étudiant</th>

@@ -16,7 +16,6 @@
     </div>
     <div class="card-body">
 
-\\c
         @if($errors->any())
         
             <div class="alert alert-danger">
